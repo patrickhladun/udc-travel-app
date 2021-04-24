@@ -1,7 +1,11 @@
-const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const dotenv = require('dotenv');
+const express = require('express');
+const fetch = require('node-fetch');
 const { response } = require('express');
+
+dotenv.config();
 
 const app = express();
 
@@ -14,12 +18,12 @@ const server = app.listen(port, () => console.log(`Running on port: ${port}`));
 
 app.use(express.static('public'));
 
-let projectData = {};
-
-app.get('/entry', (req, res) => {
-    res.send(projectData);
-});
-
-app.post('/entry', (req, res) => {
-    projectData = req.body;
+app.post('/geonames', (req, res) => {
+    const username = rocess.env.GEONAMES_USER;
+    fetch(`http://api.geonames.org/postalCodeSearch?postalcode=9011&maxRows=10&username=${username}`, { 
+        method: 'POST' 
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log('error', error));
 });
