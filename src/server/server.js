@@ -19,11 +19,34 @@ const server = app.listen(port, () => console.log(`Running on port: ${port}`));
 app.use(express.static('public'));
 
 app.post('/geonames', (req, res) => {
-    const username = rocess.env.GEONAMES_USER;
-    fetch(`http://api.geonames.org/postalCodeSearch?postalcode=9011&maxRows=10&username=${username}`, { 
+    const key = process.env.GEONAMES_KEY;
+    const url = `http://api.geonames.org/postalCodeSearch?postalcode=9011&maxRows=10&username=${key}`;
+    const options = { 
         method: 'POST' 
-    })
+    };
+
+    fetch(url, options)
     .then(response => response.json())
     .then(data => console.log(data))
+    .catch(error => console.log('error', error));
+});
+
+app.get('/background', (req, res) => {
+    const key = process.env.PIXABAY_KEY;
+    const query = '&q=city&orientation=horizontal&image_type=photo&min_width=1200';
+    const url = `https://pixabay.com/api/?key=${key}${query}`;
+    const options = { 
+        method: 'POST' 
+    }
+
+    fetch(url, options)
+    .then(response => response.json())
+    .then(data => {
+        const randomImage = Math.floor(Math.random() * 20);
+        const image = data.hits[randomImage];v
+        if(image !== undefined || image !== '') {
+            res.send({url:image.webformatURL});
+        }
+    })
     .catch(error => console.log('error', error));
 });
