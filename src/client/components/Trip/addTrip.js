@@ -21,10 +21,11 @@ export default class AddTrip extends React.Component {
                         value={this.state.title}
                         onChange={this.onTitleChange}
                     />
-                    <input 
-                        type="text"
-                        placeholder="Start Date"
-                    />
+                    <select>
+                            <option value="">-- Select Country --</option>
+                            <option value="ireland">Ireland</option>
+                            <option value="poland">Poland</option>
+                    </select>
                     <input 
                         type="text"
                         placeholder="End Date"
