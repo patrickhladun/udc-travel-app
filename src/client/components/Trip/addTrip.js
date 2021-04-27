@@ -2,9 +2,8 @@ import React from 'react';
 import moment from 'moment';
 import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
-
-const now = moment();
-console.log(now.format('MMMM Do, YYYY'));
+import Textfield from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 export default class AddTrip extends React.Component {
     state = {
@@ -28,10 +27,26 @@ export default class AddTrip extends React.Component {
         return (
             <div>
                 <form>
-                <MuiPickersUtilsProvider utils={MomentUtils}>
-                    <DatePicker value={this.state.createdAt} onChange={this.onDateChange} />   
-                </MuiPickersUtilsProvider>
-                    <button onClick={this.getGeonames}>Add a Trip</button>
+                    <Textfield />
+                    <MuiPickersUtilsProvider utils={MomentUtils}>
+                        <DatePicker
+                            variant="dialog"
+                            orientation="landscape"
+                            disablePast={true}
+                            value={this.state.createdAt} 
+                            onChange={this.onDateChange} 
+                        />
+                        <DatePicker
+                            variant="dialog"
+                            orientation="landscape"
+                            disablePast={true}
+                            value={this.state.createdAt} 
+                            onChange={this.onDateChange} 
+                        />   
+                    </MuiPickersUtilsProvider>
+                    <Button
+                        variant="outlined"
+                    >Add a Trip</Button>
                 </form>
             </div>
         )
