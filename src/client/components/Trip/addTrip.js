@@ -3,7 +3,6 @@ import React from 'react';
 export default class AddTrip extends React.Component {
     state = {
         title: '',
-        description: '',
         startDate: '',
         endDate: ''
     };
@@ -21,10 +20,6 @@ export default class AddTrip extends React.Component {
                         autoFocus
                         value={this.state.title}
                         onChange={this.onTitleChange}
-                    />
-                    <input 
-                        type="text"
-                        placeholder="Trip Description"
                     />
                     <input 
                         type="text"
