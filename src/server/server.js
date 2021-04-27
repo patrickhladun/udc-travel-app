@@ -43,7 +43,7 @@ app.get('/background', (req, res) => {
     .then(response => response.json())
     .then(data => {
         const randomImage = Math.floor(Math.random() * 20);
-        const image = data.hits[randomImage];v
+        const image = data.hits[randomImage];
         if(image !== undefined || image !== '') {
             res.send({url:image.webformatURL});
         }
