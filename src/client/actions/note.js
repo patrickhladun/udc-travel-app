@@ -1,18 +1,18 @@
 import uuid from 'uuid';
 
-export const addNotes = (
+export const actionAddNote = (
     {
         note = ''
     } = {}
 ) => ({
-    type: 'ADD_NOTES',
+    type: 'ADD_NOTE',
     note: {
         id: uuid(),
         note
     }
 });
 
-export const removeNotes = ({ id } = {}) => ({
-    type: 'REMOVE_NOTES',
+export const actionRemoveNote = ({ id } = {}) => ({
+    type: 'REMOVE_NOTE',
     id
 });
