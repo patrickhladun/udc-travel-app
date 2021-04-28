@@ -1,8 +1,2 @@
-body {
-    margin: 0;
-    padding: 0;
-}
-.header {
-    min-height: 200px;
-    // filter: blur(4px);
-}
+@import './general';
+@import './trip-list';
