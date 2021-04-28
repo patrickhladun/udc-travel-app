@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import TripListItem from './TripListItem';
 
 const TripList = (props) => (
-    <div>
-        {console.log(props.trips)}
-        {props.trips.length}
+    <div className="trip-list">
+        {props.trips.map(trip => <TripListItem key={trip.id} {...trip}/>)}
     </div>
 );
 
