@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const ListTrips = (props) => (
+const TripList = (props) => (
     <div>
-        <h1>My Trips</h1>
+        {console.log(props.trips)}
         {props.trips.length}
     </div>
 );
@@ -14,4 +14,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps)(ListTrips);
+export default connect(mapStateToProps)(TripList);

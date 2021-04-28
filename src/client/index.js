@@ -4,8 +4,8 @@ import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import { actionAddTrip } from './actions/trip';
 import Header from './components/Header/header';
-import ListTrips from './components/Trip/listTrips';
-import AddTrip from './components/Trip/addTrip';
+import AddTrip from './components/Trip/AddTrip';
+import TripList from './components/Trip/TripList';
 import Footer from './components/Footer/footer';
 import './styles/style.scss';
 
@@ -41,8 +41,8 @@ class App extends React.Component {
         return (
             <Provider store={store}>
                 <Header />
-                <ListTrips />
                 <AddTrip />
+                <TripList />
                 <Footer />
             </Provider>
         )
