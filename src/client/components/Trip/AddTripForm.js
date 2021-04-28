@@ -10,7 +10,7 @@ export default class AddTrip extends React.Component {
         title: '',
         startDate: moment(),
         endDate: moment(),
-        calendarFocused: false,
+        error: ''
     };
     onTitleChange = (e) => {
         const title = e.target.value;
@@ -24,17 +24,21 @@ export default class AddTrip extends React.Component {
     };
     onSubmit = (e) => {
         e.preventDefault();
-        console.log('clicked');
-        this.props.onSubmit({
-            title: this.state.title,
-            startDate: this.state.startDate.valueOf(),
-            endDate: this.state.endDate.valueOf()
-        })
+        if(!this.state.title) {
+            this.setState(() => ({error: 'Please provide title.'}));
+        } else {
+            this.setState(() => ({error: ''}));
+            this.props.onSubmit({
+                title: this.state.title,
+                startDate: this.state.startDate.valueOf(),
+                endDate: this.state.endDate.valueOf()
+            })
+        }
     }
     render() {
-        console.log(this.state);
         return (
             <div>
+                {this.state.error && <p>{this.state.error}</p>}
                 <form onSubmit={this.onSubmit}>
                     <Textfield
                         label="Trip title"
