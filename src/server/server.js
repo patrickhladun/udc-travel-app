@@ -23,16 +23,15 @@ app.use(express.static('public'));
 // 
 
 
-app.post('/destination', (req, res) => {
+app.post('/destination', async (req, res) => {
+    const geoKey = process.env.GEONAMES_KEY;
+    const weatherKey = process.env.WEATHERBIT_KEY;
+    
     const city = req.body.city;
     let data = {};
-    const key = process.env.GEONAMES_KEY;
-    const url = `http://api.geonames.org/searchJSON?q=${city}&maxRows=1&username=${key}`;
-    const options = { 
-        method: 'GET'
-    };
+    const geoUrl = `http://api.geonames.org/searchJSON?q=${city}&maxRows=1&username=${geoKey}`;
 
-    fetch(url, options)
+    await fetch(geoUrl)
     .then(response => response.json())
     .then(response => {
         const { lat, lng, toponymName } = response.geonames[0];
@@ -41,10 +40,36 @@ app.post('/destination', (req, res) => {
             lat,
             lng
         }
-        console.log(data);
     })
     .catch(error => console.log('error', error));
 
+    const currentWeatherUrl = `https://api.weatherbit.io/v2.0/current?lat=${data.lat}&lon=${data.lng}&key=${weatherKey}`;
+
+    await fetch(currentWeatherUrl)
+    .then(response => response.json())
+    .then(response => {
+        data = {
+            ...data,
+            curentWeather: response.data[0]
+        }
+    })
+    .catch(error => console.log('error', error));
+
+    const forecastWeatherUrl = `https://api.weatherbit.io/v2.0/forecast/daily?lat=${data.lat}&lon=${data.lng}&key=${weatherKey}`;
+
+    await fetch(forecastWeatherUrl)
+    .then(response => response.json())
+    .then(response => {
+        console.log(response.data);
+        data = {
+            ...data,
+            forecastWeather: response.data
+        }
+    })
+    .catch(error => console.log('error', error));
+
+    console.log(data);
+    
 });
 
 // app.get('/background', (req, res) => {
