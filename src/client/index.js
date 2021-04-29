@@ -1,15 +1,12 @@
-import e from 'cors';
-import { destinationForm, tripForm } from './js/app';
+import { destinationForm, tripForm, showTrips } from './js/app';
 import './styles/style.scss';
 
-
-let destinations = localStorage.getItem('destinations') ? JSON.parse(localStorage.getItem('destinations')) : [];
-
 tripForm();
+showTrips();
+destinationForm();
 
 const button = document.getElementById('clear');
 button.addEventListener('click', function (e) {
     e.preventDefault;
     localStorage.clear();
-    console.log(localStorage);
 });
