@@ -22,13 +22,14 @@ app.use(express.static('public'));
 // http://api.geonames.org/searchJSON?q=CITY&maxRows=1&username=USERNAME
 // 
 
-
 app.post('/destination', async (req, res) => {
     const geoKey = process.env.GEONAMES_KEY;
     const weatherKey = process.env.WEATHERBIT_KEY;
+    const pixabayKey = process.env.PIXABAY_KEY;
     
     const city = req.body.city;
     let data = {};
+    
     const geoUrl = `http://api.geonames.org/searchJSON?q=${city}&maxRows=1&username=${geoKey}`;
 
     await fetch(geoUrl)
@@ -60,7 +61,6 @@ app.post('/destination', async (req, res) => {
     await fetch(forecastWeatherUrl)
     .then(response => response.json())
     .then(response => {
-        console.log(response.data);
         data = {
             ...data,
             forecastWeather: response.data
@@ -68,8 +68,20 @@ app.post('/destination', async (req, res) => {
     })
     .catch(error => console.log('error', error));
 
-    console.log(data);
+    const pixabayQuery  = `&q=${data.city}&orientation=horizontal&image_type=photo`;
+    const pixabayUrl = `https://pixabay.com/api/?key=${pixabayKey}${pixabayQuery}`;
     
+    await fetch(pixabayUrl)
+    .then(response => response.json())
+    .then(response => {
+        data = {
+            ...data,
+            imageURL: response.hits[0].webformatURL
+        }
+    })
+    .catch(error => console.log('error', error));
+
+    res.send(data);
 });
 
 // app.get('/background', (req, res) => {

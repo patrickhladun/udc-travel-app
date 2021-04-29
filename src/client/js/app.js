@@ -4,6 +4,7 @@ export const formData = () => {
 
     addDestination.addEventListener('submit', (e) => {
         e.preventDefault();
+        let destination = {};
         const city = document.getElementById('city').value;
         const date = document.getElementById('date').value;
         const payload = {
@@ -16,6 +17,12 @@ export const formData = () => {
             body: JSON.stringify(payload)
         })
         .then(response => response.json())
-        .then(response => console.log(response));
+        .then(response => {
+            destination = {
+                date,
+                ...response
+            };
+            console.log(destination);
+        });
     });
 };
