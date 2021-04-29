@@ -11,15 +11,19 @@
     <div class="page">
         <div class="header">
             <h1>Travel App</h1>
+            <button id="clear">Clear</button>
         </div>
+        <form id="addTrip">
+            <div class="field">
+                <label for="tripTitle">Trip Title</label>
+                <input id="tripTitle" type="text" placeholder="Add your trip">
+            </div>
+            <button type="submit">Add trip</button>
+        </form>
         <form id="addDestination">
             <div class="field">
                 <label for="city">City</label>
                 <input id="city" type="text" placeholder="City">
-            </div>
-            <div class="field">
-                <label for="date">Date</label>
-                <input id="date" type="text" placeholder="Date">
             </div>
             <button type="submit">Submit</button>
         </form>

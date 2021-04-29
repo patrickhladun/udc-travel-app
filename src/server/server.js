@@ -71,6 +71,8 @@ app.post('/destination', async (req, res) => {
     const pixabayQuery  = `&q=${data.city}&orientation=horizontal&image_type=photo`;
     const pixabayUrl = `https://pixabay.com/api/?key=${pixabayKey}${pixabayQuery}`;
     
+    // TODO: Pull in an image for the country when no results
+
     await fetch(pixabayUrl)
     .then(response => response.json())
     .then(response => {
