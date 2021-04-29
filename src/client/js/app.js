@@ -20,6 +20,7 @@ export const tripForm = () => {
         }
         trips.push(tripData);
         localStorage.setItem('trips', JSON.stringify(trips));
+        showTrips();
         
     });
 };
@@ -27,30 +28,26 @@ export const tripForm = () => {
 export const showTrips = () => {
     const trips = JSON.parse(localStorage.getItem('trips'));
     const tripList = document.getElementById('trip-list');
+    tripList.innerHTML = '';
 
     trips.forEach(trip => {
         const tripItem = document.createElement('div');
-
         const destinationForm = `
             <div><p>Trip Title: ${trip.tripTitle}</p></div>
             <form id="${trip.id}" class="addDestination">
                 <div class="field">
-                    <input type="text" placeholder="Destination"/>
+                    <input type="text" id="city" name="city" placeholder="City"/>
                 </div>
                 <div class="field__hidden">
-                    <input type="text" value="${trip.id}">
+                    <input type="text" id="tripId" name="tripId" value="${trip.id}">
                 </div>
                 <div>
                     <button type="submit">Add Destination</button>
                 </div>
             </form>
         `;
-
         tripItem.innerHTML = destinationForm;
         tripList.appendChild(tripItem);
-
-        // build item apperance in HTML
-
     });
 }
 
@@ -64,39 +61,31 @@ export const destinationForm = () => {
     addDestination.forEach(destination => {
         destination.addEventListener('submit', (e) => {
             e.preventDefault();
-            console.log(e);
+            let destination = {};
+            const { city, tripId } = e.target.elements;
+            
+            const payload = {
+                city: city.value
+            };
 
-            // let destination = {};
-            // const city = document.getElementById('city').value;
-            // const date = document.getElementById('date').value;
-            // const payload = {
-            //     city
-            // };
-
-
-            // <form id="addDestination">
-            //     <div class="field">
-            //         <label for="city">City</label>
-            //         <input id="city" type="text" placeholder="City">
-            //     </div>
-            //     <button type="submit">Submit</button>
-            // </form>
-
-
-            // fetch('http://localhost:8080/destination', {
-            //     method: 'POST',
-            //     credentials: 'same-origin',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(payload)
-            // })
-            // .then(response => response.json())
-            // .then(response => {
-            //     destination = {
-            //         date,
-            //         ...response
-            //     };
-            //     console.log(destination);
-            // });
+            fetch('http://localhost:8080/destination', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(response => {
+                destination = {
+                    id: uuidv4(),
+                    tripId: tripId.value,
+                    city: city.value,
+                    ...response
+                };
+                destinations.push(destination);
+                localStorage.setItem('destinations', JSON.stringify(destinations));
+                console.log(localStorage);
+            });
         });
     });
 
