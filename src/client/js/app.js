@@ -45,7 +45,9 @@ export const showTrips = () => {
         tripItem.innerHTML = `
             <div class="trip__header" data-accordion="toggle">
                 <h2 class="trip__title">${trip.tripTitle}</h2>
-                <div class="trip__details"></div>
+                <div class="trip__details">
+                    <p>Details goes here</p>
+                </div>
             </div>
             <div class="trip__destinations" data-accordion="panel">
                 <h3>Let's visit some great places!</h3>
@@ -60,7 +62,7 @@ export const showTrips = () => {
                         <button type="submit">Add Destination</button>
                     </div>
                 </form>
-                <div data-destination-list="${trip.id}"></div>
+                <div class="destination-list" data-destination-list="${trip.id}"></div>
             </div>
         `;
         tripList.appendChild(tripItem);

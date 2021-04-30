@@ -1,7 +1,8 @@
 .destination {
-    background: var(--color-primary-light);
+    background: tint($color-primary, 20%);
     margin-bottom: 4px;
     overflow: hidden;
+    color: tint($color-primary, 90%);
 
     &__header {
         cursor: pointer;
@@ -9,10 +10,15 @@
     }
 
     &__title {
+        padding: 24px 12px;
         line-height: 0;
+        margin: 0;
+        overflow: hidden;
+        pointer-events: none;
     }
 
     &__info {
+        background: tint($color-primary, 80%);
         display: none;
         overflow: hidden;
 
@@ -24,4 +30,7 @@
     &__image {
         max-width: 200px;
     }
+}
+.destination-list {
+    margin-top: 24px;
 }

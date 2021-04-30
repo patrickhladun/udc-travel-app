@@ -1,29 +1,40 @@
 .trip {
-    background: var(--color-primary-light);
+    background: rgba($color-primary, 0.3);
     padding: 24px;
     margin-bottom: 12px;
     display: flex;
     flex-direction: column;
 
     &__header {
-        background: var(--color-secondary-light);
-        padding: 4px 12px;
+        background: $color-secondary;
         cursor: pointer;
         transition: all 0.3s ease-out;
+        overflow: hidden;
 
         &.active {
-            background: red;
+            background: tint($color-secondary, 20%);
             transition: all 0.3s ease-in;
         }
     }
 
+    &__details {
+        background: tint($color-secondary, 50%);
+        padding: 12px;
+
+        p {
+            margin: 0;
+        }
+    }
+
     &__title {
+        color: shade($color-secondary, 70%);
+        padding: 4px 12px;
         line-height: 0;
         pointer-events: none;
     }
 
     &__destinations {
-        background: white;
+        background: tint($color-secondary, 70%);
         padding: 12px;
         display: none;
         transition: all 0.3s ease-out;

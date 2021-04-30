@@ -7,8 +7,9 @@ html {
 }
 
 body {
+    background: tint($color-shade, 70%);
     font: 16px/22px Arial, sans-serif;
-    color: var(--color-text);
+    color: $color-text;
     overflow: hidden;
 }
 
@@ -39,11 +40,11 @@ h3 {
     padding: 60px 0;
 }
 .page-title {
-    color: var(--color-text-light);
     text-align: center;
 }
 .add-trip {
-    background: var(--color-primary-light);
+    background: rgba($color-primary, 0.9);
     max-width: 600px;
     margin: 0 auto;
+    color: $color-text-light;
 }
