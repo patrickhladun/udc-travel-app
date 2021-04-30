@@ -1,5 +1,14 @@
 import { v4 as uuidv4 } from 'uuid';
 
+export const getBackground = () => {
+    fetch('http://localhost:8080/background')
+    .then(response => response.json())
+    .then(response => {
+        const header = document.getElementById('header');
+        header.style.backgroundImage = `url(${response.url})`;
+    });   
+};
+
 export const tripForm = () => {
     let trips = localStorage.getItem('trips') ? JSON.parse(localStorage.getItem('trips')) : [];    
     localStorage.setItem('trips', JSON.stringify(trips));
@@ -33,23 +42,29 @@ export const showTrips = () => {
     trips.forEach(trip => {
         const tripItem = document.createElement('div');
         const destinationForm = `
-            <div><p>Trip Title: ${trip.tripTitle}</p></div>
-            <form id="${trip.id}" class="addDestination">
-                <div class="field">
-                    <input type="text" id="city" name="city" placeholder="City"/>
-                </div>
-                <div class="field__hidden">
-                    <input type="text" id="tripId" name="tripId" value="${trip.id}">
-                </div>
-                <div>
-                    <button type="submit">Add Destination</button>
-                </div>
-            </form>
+            <div class="trip">
+                <p>Trip Title: ${trip.tripTitle}</p>
+                <form id="${trip.id}" class="addDestination">
+                    <div class="field">
+                        <input type="text" id="city" name="city" placeholder="City"/>
+                    </div>
+                    <div class="field__hidden">
+                        <input type="text" id="tripId" name="tripId" value="${trip.id}">
+                    </div>
+                    <div>
+                        <button type="submit">Add Destination</button>
+                    </div>
+                </form>
+            </div>
         `;
         tripItem.innerHTML = destinationForm;
         tripList.appendChild(tripItem);
     });
 }
+
+const showDestinations = (destination) => {
+    console.log(destination);
+};
 
 export const destinationForm = () => {
     let destinations = localStorage.getItem('destinations') ? JSON.parse(localStorage.getItem('destinations')) : [];    
@@ -84,7 +99,7 @@ export const destinationForm = () => {
                 };
                 destinations.push(destination);
                 localStorage.setItem('destinations', JSON.stringify(destinations));
-                console.log(localStorage);
+                showDestinations(destination);
             });
         });
     });

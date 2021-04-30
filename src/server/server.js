@@ -86,22 +86,22 @@ app.post('/destination', async (req, res) => {
     res.send(data);
 });
 
-// app.get('/background', (req, res) => {
-//     const key = process.env.PIXABAY_KEY;
-//     const query = '&q=city&orientation=horizontal&image_type=photo&min_width=1200';
-//     const url = `https://pixabay.com/api/?key=${key}${query}`;
-//     const options = { 
-//         method: 'POST' 
-//     }
+app.get('/background', (req, res) => {
+    const key = process.env.PIXABAY_KEY;
+    const query = '&q=city&orientation=horizontal&image_type=photo&min_width=1200';
+    const url = `https://pixabay.com/api/?key=${key}${query}`;
+    const options = { 
+        method: 'POST' 
+    }
 
-//     fetch(url, options)
-//     .then(response => response.json())
-//     .then(data => {
-//         const randomImage = Math.floor(Math.random() * 20);
-//         const image = data.hits[randomImage];
-//         if(image !== undefined || image !== '') {
-//             res.send({url:image.webformatURL});
-//         }
-//     })
-//     .catch(error => console.log('error', error));
-// });
+    fetch(url, options)
+    .then(response => response.json())
+    .then(data => {
+        const randomImage = Math.floor(Math.random() * 20);
+        const image = data.hits[randomImage];
+        if(image !== undefined || image !== '') {
+            res.send({url:image.webformatURL});
+        }
+    })
+    .catch(error => console.log('error', error));
+});

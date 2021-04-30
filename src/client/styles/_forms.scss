@@ -1,0 +1,26 @@
+input {
+    padding: 8px 12px;
+    margin-right: 4px;
+}
+.submit {
+    background: var(--color-primary);
+    display: block;
+    padding: 8px 12px;
+    border: none;
+}
+label {
+    padding: 4px 0px;
+}
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.trip-form {
+    padding: 24px;
+    max-width: 300px;
+}
+
+.field__hidden {
+    display: none;
+}

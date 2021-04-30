@@ -9,18 +9,21 @@
 </head>
 <body>
     <div class="page">
-        <div class="header">
+        <div id="header">
             <h1>Travel App</h1>
             <button id="clear">Clear</button>
         </div>
-        <form id="addTrip">
-            <div class="field">
-                <label for="tripTitle">Trip Title</label>
-                <input id="tripTitle" type="text" placeholder="Add your trip">
-            </div>
-            <button type="submit">Add trip</button>
-        </form>
-        <div id="trip-list"></div>
+        <section class="add-trip">
+            <form id="addTrip" class="trip-form">
+                <div class="field">
+                    <label for="tripTitle">Trip Title</label>
+                    <input id="tripTitle" type="text" placeholder="Add your trip">
+                </div>
+                <button type="submit" class="submit">Add trip</button>
+            </form>
+        </section>
+        
+        <section id="trip-list"></section>
     </div>
 </body>
 </html>
