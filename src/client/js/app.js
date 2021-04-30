@@ -144,13 +144,16 @@ export const showDestinations = (tripId) => {
 }
 
 export const accordions = () => {
-    const accordions = document.querySelectorAll(".accordion");
-    accordions.forEach(accordion => {
-        const toggle = accordion.querySelector("[data-accordion='toggle']");
-        const panel = accordion.querySelector("[data-accordion='panel']");
-        toggle.addEventListener("click", (e) => {
-            toggle.classList.toggle('active');
-            panel.classList.toggle('active');
-        });
-    })
+    document.querySelector('body').addEventListener('click', e => {
+        if(e.target.matches(".accordion") || e.target.closest(".accordion")) {
+            const item = e.target;
+            if(item.hasAttribute('data-accordion') && item.getAttribute('data-accordion') === 'toggle') {
+                const parent = item.parentElement;
+                const toggle = parent.querySelector("[data-accordion='toggle']");
+                const panel = parent.querySelector("[data-accordion='panel']");
+                toggle.classList.toggle('active');
+                panel.classList.toggle('active');
+            }
+        }
+    });
 }

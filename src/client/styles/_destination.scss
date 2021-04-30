@@ -1,13 +1,24 @@
 .destination {
     background: var(--color-primary-light);
     margin-bottom: 4px;
+    overflow: hidden;
+
+    &__header {
+        cursor: pointer;
+        overflow: hidden;
+    }
 
     &__title {
         line-height: 0;
     }
+
     &__info {
         display: none;
         overflow: hidden;
+
+        &.active {
+            display: block;
+        }
     }
 
     &__image {

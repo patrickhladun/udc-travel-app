@@ -10,20 +10,20 @@
 <body>
     <div class="page">
         <div id="header">
-            <h1>Travel App</h1>
-            <button id="clear">Clear</button>
-        </div>
-        <section class="add-trip">
-            <form id="addTrip" class="trip-form">
-                <div class="field">
-                    <label for="tripTitle">Trip Title</label>
-                    <input id="tripTitle" type="text" placeholder="Add your trip">
-                </div>
-                <button type="submit" class="submit">Add trip</button>
-            </form>
-        </section>
-        
+            <h1 class="page-title">Travel App</h1>
+            <div class="add-trip">
+                <form id="addTrip" class="trip-form">
+                    <div class="field">
+                        <label for="tripTitle">Add a trip</label>
+                        <input id="tripTitle" type="text" placeholder="Add your trip">
+                    </div>
+                    <button type="submit" class="submit">Add trip</button>
+                </form>
+            </div>
+        </div>    
         <section id="trip-list"></section>
+        <button id="clear">Clear</button>
     </div>
+    
 </body>
 </html>
