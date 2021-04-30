@@ -41,21 +41,25 @@ export const showTrips = () => {
 
     trips.forEach(trip => {
         const tripItem = document.createElement('div');
-        tripItem.setAttribute('class', 'trip');
+        tripItem.classList.add('trip');
         tripItem.innerHTML = `
-            <p>Trip Title: ${trip.tripTitle}</p>
-            <form id="${trip.id}" class="addDestination">
-                <div class="field">
-                    <input type="text" id="city" name="city" placeholder="City"/>
-                </div>
-                <div class="field__hidden">
-                    <input type="text" id="tripId" name="tripId" value="${trip.id}">
-                </div>
-                <div>
-                    <button type="submit">Add Destination</button>
-                </div>
-            </form>
-            <div data-destination-list="${trip.id}"></div>
+            <h2>${trip.tripTitle}</h2>
+            <button class="accordion">Button</button>
+            <div class="trip__info panel">
+                <h3>Let's visit some great places!</h3>
+                <form id="${trip.id}" class="addDestination">
+                    <div class="field">
+                        <input type="text" id="city" name="city" placeholder="City"/>
+                    </div>
+                    <div class="field__hidden">
+                        <input type="text" id="tripId" name="tripId" value="${trip.id}">
+                    </div>
+                    <div>
+                        <button type="submit">Add Destination</button>
+                    </div>
+                </form>
+                <div data-destination-list="${trip.id}"></div>
+            </div>
         `;
         tripList.appendChild(tripItem);
         showDestinations(trip.id);
@@ -119,15 +123,39 @@ export const showDestinations = (tripId) => {
                 console.log(destination);
                 const { clouds, temp } = destination.curentWeather;
                 item.innerHTML = `
-                    <div class="destination">
+                    <div class="destination">   
                         <h3>${destination.city}</h3>
-                        <img class="destination__image" src="${destination.imageURL}" />
-                        <div class="current-weather">
-                            <div class="current-weather__temp">${temp} ℃</div>
+                        <button class="accordion">Button</button>
+                        <div class="destination__info panel">
+                            <img class="destination__image" src="${destination.imageURL}" />
+                            <div class="current-weather">
+                                <div class="current-weather__temp">${temp} ℃</div>
+                            </div>
                         </div>
                     </div>
                 `;
                 destinationList.appendChild(item);
+            }
+        });
+    }
+}
+
+export const accordions = () => {
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            /* Toggle between adding and removing the "active" class,
+            to highlight the button that controls the panel */
+            this.classList.toggle("active");
+
+            /* Toggle between hiding and showing the active panel */
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+            panel.style.display = "none";
+            } else {
+            panel.style.display = "block";
             }
         });
     }

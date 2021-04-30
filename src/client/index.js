@@ -1,10 +1,12 @@
-import { destinationForm, tripForm, showTrips, getBackground } from './js/app';
+import { destinationForm, tripForm, showTrips, getBackground, accordions } from './js/app';
 import './styles/style.scss';
 
 getBackground();
 tripForm();
 showTrips();
 destinationForm();
+accordions();
+
 
 console.log(localStorage);
 

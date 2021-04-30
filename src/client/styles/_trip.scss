@@ -2,4 +2,8 @@
     background: var(--color-secondary-light);
     padding: 24px;
     margin-bottom: 12px;
+
+    &__info {
+        display: none;
+    }
 }
