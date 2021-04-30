@@ -41,30 +41,26 @@ export const showTrips = () => {
 
     trips.forEach(trip => {
         const tripItem = document.createElement('div');
-        const destinationForm = `
-            <div class="trip">
-                <p>Trip Title: ${trip.tripTitle}</p>
-                <form id="${trip.id}" class="addDestination">
-                    <div class="field">
-                        <input type="text" id="city" name="city" placeholder="City"/>
-                    </div>
-                    <div class="field__hidden">
-                        <input type="text" id="tripId" name="tripId" value="${trip.id}">
-                    </div>
-                    <div>
-                        <button type="submit">Add Destination</button>
-                    </div>
-                </form>
-            </div>
+        tripItem.setAttribute('class', 'trip');
+        tripItem.innerHTML = `
+            <p>Trip Title: ${trip.tripTitle}</p>
+            <form id="${trip.id}" class="addDestination">
+                <div class="field">
+                    <input type="text" id="city" name="city" placeholder="City"/>
+                </div>
+                <div class="field__hidden">
+                    <input type="text" id="tripId" name="tripId" value="${trip.id}">
+                </div>
+                <div>
+                    <button type="submit">Add Destination</button>
+                </div>
+            </form>
+            <div data-destination-list="${trip.id}"></div>
         `;
-        tripItem.innerHTML = destinationForm;
         tripList.appendChild(tripItem);
+        showDestinations(trip.id);
     });
 }
-
-const showDestinations = (destination) => {
-    console.log(destination);
-};
 
 export const destinationForm = () => {
     let destinations = localStorage.getItem('destinations') ? JSON.parse(localStorage.getItem('destinations')) : [];    
@@ -99,10 +95,40 @@ export const destinationForm = () => {
                 };
                 destinations.push(destination);
                 localStorage.setItem('destinations', JSON.stringify(destinations));
-                showDestinations(destination);
+                showDestinations(destination.tripId);
             });
         });
     });
 
     
 };
+
+const getWeatherIcon = () => {
+    
+};
+
+export const showDestinations = (tripId) => {
+    const destinations = JSON.parse(localStorage.getItem('destinations'));
+    const destinationList = document.querySelector(`[data-destination-list="${tripId}"]`);
+    destinationList.innerHTML = '';
+
+    if(destinations) {
+        destinations.forEach(destination => {
+            const item = document.createElement('div');
+            if(tripId === destination.tripId) {
+                console.log(destination);
+                const { clouds, temp } = destination.curentWeather;
+                item.innerHTML = `
+                    <div class="destination">
+                        <h3>${destination.city}</h3>
+                        <img class="destination__image" src="${destination.imageURL}" />
+                        <div class="current-weather">
+                            <div class="current-weather__temp">${temp} ℃</div>
+                        </div>
+                    </div>
+                `;
+                destinationList.appendChild(item);
+            }
+        });
+    }
+}
