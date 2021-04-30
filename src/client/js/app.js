@@ -41,11 +41,13 @@ export const showTrips = () => {
 
     trips.forEach(trip => {
         const tripItem = document.createElement('div');
-        tripItem.classList.add('trip');
+        tripItem.classList.add('trip', 'accordion');
         tripItem.innerHTML = `
-            <h2>${trip.tripTitle}</h2>
-            <button class="accordion">Button</button>
-            <div class="trip__info panel">
+            <div class="trip__header" data-accordion="toggle">
+                <h2 class="trip__title">${trip.tripTitle}</h2>
+                <div class="trip__details"></div>
+            </div>
+            <div class="trip__destinations" data-accordion="panel">
                 <h3>Let's visit some great places!</h3>
                 <form id="${trip.id}" class="addDestination">
                     <div class="field">
@@ -119,18 +121,19 @@ export const showDestinations = (tripId) => {
     if(destinations) {
         destinations.forEach(destination => {
             const item = document.createElement('div');
+            item.classList.add('destination', 'accordion');
+
             if(tripId === destination.tripId) {
                 console.log(destination);
                 const { clouds, temp } = destination.curentWeather;
                 item.innerHTML = `
-                    <div class="destination">   
-                        <h3>${destination.city}</h3>
-                        <button class="accordion">Button</button>
-                        <div class="destination__info panel">
-                            <img class="destination__image" src="${destination.imageURL}" />
-                            <div class="current-weather">
-                                <div class="current-weather__temp">${temp} ℃</div>
-                            </div>
+                    <div class="destination__header" data-accordion="toggle">
+                        <h3 class="destination__title">${destination.city}</h3>
+                    </div>
+                    <div class="destination__info" data-accordion="panel">
+                        <img class="destination__image" src="${destination.imageURL}" />
+                        <div class="current-weather">
+                            <div class="current-weather__temp">${temp} ℃</div>
                         </div>
                     </div>
                 `;
@@ -141,22 +144,13 @@ export const showDestinations = (tripId) => {
 }
 
 export const accordions = () => {
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-            /* Toggle between adding and removing the "active" class,
-            to highlight the button that controls the panel */
-            this.classList.toggle("active");
-
-            /* Toggle between hiding and showing the active panel */
-            var panel = this.nextElementSibling;
-            if (panel.style.display === "block") {
-            panel.style.display = "none";
-            } else {
-            panel.style.display = "block";
-            }
+    const accordions = document.querySelectorAll(".accordion");
+    accordions.forEach(accordion => {
+        const toggle = accordion.querySelector("[data-accordion='toggle']");
+        const panel = accordion.querySelector("[data-accordion='panel']");
+        toggle.addEventListener("click", (e) => {
+            toggle.classList.toggle('active');
+            panel.classList.toggle('active');
         });
-    }
+    })
 }

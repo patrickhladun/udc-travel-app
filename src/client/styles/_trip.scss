@@ -1,9 +1,37 @@
 .trip {
-    background: var(--color-secondary-light);
+    background: var(--color-primary-light);
     padding: 24px;
     margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
 
-    &__info {
-        display: none;
+    &__header {
+        background: var(--color-secondary-light);
+        padding: 4px 12px;
+        cursor: pointer;
+        transition: all 0.3s ease-out;
+
+        &.active {
+            background: red;
+            transition: all 0.3s ease-in;
+        }
     }
+
+    &__title {
+        line-height: 0;
+    }
+
+    &__destinations {
+        background: white;
+        padding: 12px;
+        display: none;
+        transition: all 0.3s ease-out;
+
+        &.active {
+            display: block;
+            transition: all 0.3s ease-in;
+        }
+    }
+
+    
 }
