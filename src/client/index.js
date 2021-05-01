@@ -7,9 +7,6 @@ showTrips();
 destinationForm();
 accordions();
 
-
-console.log(localStorage);
-
 const button = document.getElementById('clear');
 button.addEventListener('click', function (e) {
     e.preventDefault;

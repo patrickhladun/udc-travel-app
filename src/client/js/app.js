@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import moment from 'moment';
 
 export const getBackground = () => {
     fetch('http://localhost:8080/background')
@@ -9,23 +10,36 @@ export const getBackground = () => {
     });   
 };
 
+/**
+ * Add a trip to localStorage by submitting trip form
+ */
 export const tripForm = () => {
+    // Check if trip exist in localStorage
     let trips = localStorage.getItem('trips') ? JSON.parse(localStorage.getItem('trips')) : [];    
     localStorage.setItem('trips', JSON.stringify(trips));
-    const data = JSON.parse(localStorage.getItem('trips'));
+    
     const addTrip = document.getElementById('addTrip');
     const tripsList = document.getElementById('trip-list');
 
     addTrip.addEventListener('submit', (e) => {
         e.preventDefault();
         const tripTitle = document.getElementById('tripTitle').value;
-        const startDate = 'start date';
-        const endDate = 'end date';
+        let startDate = document.getElementById('startDate').value;
+        let endDate = document.getElementById('endDate').value;
+
+        const start = moment(startDate);
+        const end = moment(endDate);
+        const days = Math.abs(moment.duration(start.diff(end)).asDays());
+
+        startDate = moment(startDate).format('MMMM, dddd');
+        endDate = moment(endDate).format('MMMM, dddd');;
+
         const tripData = {
             id: uuidv4(),
             tripTitle,
             startDate,
-            endDate
+            endDate,
+            days
         }
         trips.push(tripData);
         localStorage.setItem('trips', JSON.stringify(trips));
@@ -40,75 +54,85 @@ export const showTrips = () => {
     tripList.innerHTML = '';
 
     trips.forEach(trip => {
+        
         const tripItem = document.createElement('div');
         tripItem.classList.add('trip', 'accordion');
+
+        const { id, tripTitle, startDate, endDate, days } = trip;
+
         tripItem.innerHTML = `
             <div class="trip__header" data-accordion="toggle">
-                <h2 class="trip__title">${trip.tripTitle}</h2>
+                <h2 class="trip__title">${tripTitle}</h2>
                 <div class="trip__details">
-                    <p>Details goes here</p>
+                    <p><span>Start date:</span> ${startDate}</p>
+                    <p><span>End date:</span> ${endDate}</p>
+                    <p><span>Length of the trip:</span> ${days} Days</p>
+                    </p>
                 </div>
             </div>
             <div class="trip__destinations" data-accordion="panel">
                 <h3>Let's visit some great places!</h3>
-                <form id="${trip.id}" class="addDestination">
+                <form id="${id}" class="addDestination">
                     <div class="field">
                         <input type="text" id="city" name="city" placeholder="City"/>
                     </div>
                     <div class="field__hidden">
-                        <input type="text" id="tripId" name="tripId" value="${trip.id}">
+                        <input type="text" id="tripId" name="tripId" value="${id}">
                     </div>
                     <div>
                         <button type="submit">Add Destination</button>
                     </div>
                 </form>
-                <div class="destination-list" data-destination-list="${trip.id}"></div>
+                <div class="destination-list" data-destination-list="${id}"></div>
             </div>
         `;
         tripList.appendChild(tripItem);
-        showDestinations(trip.id);
+        showDestinations(id);
     });
 }
 
 export const destinationForm = () => {
     let destinations = localStorage.getItem('destinations') ? JSON.parse(localStorage.getItem('destinations')) : [];    
     localStorage.setItem('destinations', JSON.stringify(destinations));
-    const data = JSON.parse(localStorage.getItem('destinations'));
 
-    const addDestination = document.querySelectorAll('.addDestination');
-
-    addDestination.forEach(destination => {
-        destination.addEventListener('submit', (e) => {
+    document.querySelector('body').addEventListener('click', e => {
+        if(e.target.matches(".addDestination") || e.target.closest(".addDestination")) {
             e.preventDefault();
-            let destination = {};
-            const { city, tripId } = e.target.elements;
+            const item = e;
+            console.log(item);
+
+            // if(item.hasAttribute('data-accordion') && item.getAttribute('data-accordion') === 'toggle') {
+
+            // }
+
+            // let destination = {};
+            // const { city, tripId } = e.target.elements;
             
-            const payload = {
-                city: city.value
-            };
+            // const payload = {
+            //     city: city.value
+            // };
 
-            fetch('http://localhost:8080/destination', {
-                method: 'POST',
-                credentials: 'same-origin',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            })
-            .then(response => response.json())
-            .then(response => {
-                destination = {
-                    id: uuidv4(),
-                    tripId: tripId.value,
-                    city: city.value,
-                    ...response
-                };
-                destinations.push(destination);
-                localStorage.setItem('destinations', JSON.stringify(destinations));
-                showDestinations(destination.tripId);
-            });
-        });
+            // fetch('http://localhost:8080/destination', {
+            //     method: 'POST',
+            //     credentials: 'same-origin',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(payload)
+            // })
+            // .then(response => response.json())
+            // .then(response => {
+            //     destination = {
+            //         id: uuidv4(),
+            //         tripId: tripId.value,
+            //         city: city.value,
+            //         ...response
+            //     };
+            //     destinations.push(destination);
+            //     localStorage.setItem('destinations', JSON.stringify(destinations));
+            //     showDestinations(destination.tripId);
+            // });
+
+        }
     });
-
-    
 };
 
 const getWeatherIcon = () => {
@@ -126,7 +150,6 @@ export const showDestinations = (tripId) => {
             item.classList.add('destination', 'accordion');
 
             if(tripId === destination.tripId) {
-                console.log(destination);
                 const { clouds, temp } = destination.curentWeather;
                 item.innerHTML = `
                     <div class="destination__header" data-accordion="toggle">
