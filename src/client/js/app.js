@@ -74,13 +74,13 @@ export const showTrips = () => {
                 <h3>Let's visit some great places!</h3>
                 <form id="${id}" class="addDestination">
                     <div class="field">
-                        <input type="text" id="city" name="city" placeholder="City"/>
+                        <input type="text" id="city" name="city" placeholder="City" data-dest="city"/>
                     </div>
                     <div class="field__hidden">
-                        <input type="text" id="tripId" name="tripId" value="${id}">
+                        <input type="text" id="tripId" name="tripId" value="${id}" data-dest="tripId">
                     </div>
                     <div>
-                        <button type="submit">Add Destination</button>
+                        <button type="submit" class="pushDestination">Add Destination</button>
                     </div>
                 </form>
                 <div class="destination-list" data-destination-list="${id}"></div>
@@ -98,39 +98,38 @@ export const destinationForm = () => {
     document.querySelector('body').addEventListener('click', e => {
         if(e.target.matches(".addDestination") || e.target.closest(".addDestination")) {
             e.preventDefault();
-            const item = e;
-            console.log(item);
+            const item = e.target;
+            const form = e.target.parentElement.parentElement;
 
-            // if(item.hasAttribute('data-accordion') && item.getAttribute('data-accordion') === 'toggle') {
+            if(item.classList.value === 'pushDestination') {
+                let destination = {};
+                const city = form.querySelector("[data-dest='city']");
+                const tripId = form.querySelector("[data-dest='tripId']");
 
-            // }
+                const payload = {
+                    city: city.value
+                };
 
-            // let destination = {};
-            // const { city, tripId } = e.target.elements;
-            
-            // const payload = {
-            //     city: city.value
-            // };
-
-            // fetch('http://localhost:8080/destination', {
-            //     method: 'POST',
-            //     credentials: 'same-origin',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(payload)
-            // })
-            // .then(response => response.json())
-            // .then(response => {
-            //     destination = {
-            //         id: uuidv4(),
-            //         tripId: tripId.value,
-            //         city: city.value,
-            //         ...response
-            //     };
-            //     destinations.push(destination);
-            //     localStorage.setItem('destinations', JSON.stringify(destinations));
-            //     showDestinations(destination.tripId);
-            // });
-
+                fetch('http://localhost:8080/destination', {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                })
+                .then(response => response.json())
+                .then(response => {
+                    destination = {
+                        id: uuidv4(),
+                        tripId: tripId.value,
+                        city: city.value,
+                        ...response
+                    };
+                    destinations.push(destination);
+                    localStorage.setItem('destinations', JSON.stringify(destinations));
+                    
+                    showDestinations(destination.tripId);
+                });
+            }
         }
     });
 };
