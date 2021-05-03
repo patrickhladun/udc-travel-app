@@ -133,8 +133,22 @@ export const destinationForm = () => {
     });
 };
 
-const getWeatherIcon = () => {
-    
+const getForecastWeather = (forecast) => {
+    const fragment = document.createDocumentFragment();1
+
+    const columns = forecast.map(day => {
+        const column = document.createElement('div');
+        const weekDay = moment(day.datetime).format('ddd');
+        column.classList.add('forecast__column');
+        const columnHTML = `
+            <div class="forecast__day">${weekDay}</div>
+            <img class="forecast__icon" src="/images/icons/${day.weather.icon}.png" />
+            <div class="forecast__temp">${day.temp} ℃</div>
+        `;
+        column.innerHTML = columnHTML;
+        fragment.appendChild(column);
+    });
+    return fragment;
 };
 
 export const showDestinations = (tripId) => {
@@ -146,28 +160,36 @@ export const showDestinations = (tripId) => {
         destinations.forEach(destination => {
             const item = document.createElement('div');
             item.classList.add('destination', 'accordion');
-            console.log(destination);
+
             if(tripId === destination.tripId) {
                 const { clouds, weather, temp } = destination.curentWeather;
+                let forecast = document.createElement('div');
+                forecast.classList.add('forecast');
+                forecast.appendChild(getForecastWeather(destination.forecastWeather));
+                forecast = forecast.outerHTML;
+                
                 item.innerHTML = `
                     <div class="destination__header" data-accordion="toggle">
-                        <h3 class="destination__title">${destination.city}</h3>
+                        <div class="destination__basic">
+                            <h3 class="destination__title">${destination.city}</h3>
+                            <img class="destination__icon" src="/images/icons/${weather.icon}.png" />
+                            <span class="destination__desc">${weather.description}</span>
+                            <span class="destination__current-temp">Current temp: ${temp} ℃</span>
+                            <span class="destination__more">more</span>
+                        </div>
                     </div>
                     <div class="destination__info" data-accordion="panel">
                         <img class="destination__image" src="${destination.imageURL}" />
-                        <div class="destination__details">
-                            <div>
-                                <p><img src="/images/icons/${weather.icon}.png" /> </p>
-                                <p>${weather.description}</p>
-                            </div>
-                            <div class="current-weather__temp">Current temperature: ${temp} ℃</div>
+                        <div class="destination__forecast">
+                            <h3>Forecast weather:</h3>
+                            ${forecast}
                         </div>
                     </div>
                 `;
                 destinationList.appendChild(item);
             }
         });
-    }``
+    }
 }
 
 export const accordions = () => {

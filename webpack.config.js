@@ -37,9 +37,10 @@ module.exports = {
             filename: "./index.html",
         }),
         new CopyWebpackPlugin({
-            patterns: [
-              { from: "src/client/images", to: "images" }
-            ],
+            patterns: [{
+                from: "src/client/images",
+                to: "images"     
+            }],
           }),
         new MiniCssExtractPlugin()
     ],

@@ -1,3 +1,4 @@
+$spacing: 0 12px 0 0;
 .destination {
     background: tint($color-primary, 20%);
     margin-bottom: 4px;
@@ -9,12 +10,33 @@
         overflow: hidden;
     }
 
-    &__title {
-        padding: 24px 12px;
-        line-height: 0;
-        margin: 0;
-        overflow: hidden;
+    &__basic {
+        display: flex;
         pointer-events: none;
+        align-items: center;
+        padding: 12px 24px;
+        overflow: hidden;
+    }
+
+    &__more {
+        margin-left: auto;
+    }
+
+    &__icon {
+        max-width: 32px;
+        margin: $spacing;
+    }
+
+    &__title {
+        margin: $spacing;
+    }
+
+    &__desc {
+        margin: $spacing;
+    }
+
+    &__current-temp {
+        margin: $spacing;
     }
 
     &__info {
@@ -34,4 +56,13 @@
 }
 .destination-list {
     margin-top: 24px;
+}
+
+.forecast {
+    display: flex;
+
+    &__icon {
+        width: 32px;
+        // height: 100%;
+    }
 }
