@@ -18,15 +18,11 @@ const server = app.listen(port, () => console.log(`Running on port: ${port}`));
 
 app.use(express.static('public'));
 
-// Get city lat and lng
-// http://api.geonames.org/searchJSON?q=CITY&maxRows=1&username=USERNAME
-// 
-
 app.post('/destination', async (req, res) => {
     const geoKey = process.env.GEONAMES_KEY;
     const weatherKey = process.env.WEATHERBIT_KEY;
-    const pixabayKey = process.env.PIXABAY_KEY;
-    
+    const pixabayKey = process.env.PIXABAY_KEY; 
+
     const city = req.body.city;
     let data = {};
     
@@ -70,8 +66,6 @@ app.post('/destination', async (req, res) => {
 
     const pixabayQuery  = `&q=${data.city}&orientation=horizontal&image_type=photo`;
     const pixabayUrl = `https://pixabay.com/api/?key=${pixabayKey}${pixabayQuery}`;
-    
-    // TODO: Pull in an image for the country when no results
 
     await fetch(pixabayUrl)
     .then(response => response.json())
@@ -93,9 +87,6 @@ app.get('/background', (req, res) => {
     const options = { 
         method: 'POST' 
     }
-
-    
-
     fetch(url, options)
     .then(response => response.json())
     .then(data => {
@@ -107,3 +98,6 @@ app.get('/background', (req, res) => {
     })
     .catch(error => console.log('error', error));
 });
+
+// TODO: Pull in an image for the country when no results
+// TODO: Throw an error if there is no city found

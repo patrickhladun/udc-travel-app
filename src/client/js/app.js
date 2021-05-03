@@ -55,18 +55,17 @@ export const showTrips = () => {
     tripList.innerHTML = '';
 
     trips.forEach(trip => {
+        const { id, tripTitle, startDate, endDate, days } = trip;
         const tripItem = document.createElement('div');
         tripItem.classList.add('trip', 'accordion');
         tripItem.setAttribute('data-accordion', 'item');
 
-        const { id, tripTitle, startDate, endDate, days } = trip;
-
         tripItem.innerHTML = `
             <div class="trip__header">
                 <div class="trip__title">
-                    ${tripTitle}
-                    <span class="destination__icon icon icon-arrow" data-accordion="toggle">${arrow}</span>
-                    <span class="destination__icon icon icon-remove">${remove}</span>
+                    <span>${tripTitle}</span>
+                    <span class="destination__icon icon icon-arrow push-right" data-accordion="toggle">${arrow}</span>
+                    <span class="destination__icon icon icon-remove" data-action="remove" data-remove="trip" data-removeid="${id}">${remove}</span>
                 </div>
                 <div class="trip__details">
                     <p><strong>Your trip start on:</strong> ${startDate} <strong>, end on:</strong> ${endDate}. <strong>Length of the trip:</strong> ${days} Days</p>
@@ -98,19 +97,26 @@ export const destinationForm = () => {
     localStorage.setItem('destinations', JSON.stringify(destinations));
 
     document.querySelector('body').addEventListener('click', e => {
+
+        
+
         if(e.target.matches(".addDestination") || e.target.closest(".addDestination")) {
             e.preventDefault();
             const item = e.target;
             const form = e.target.parentElement.parentElement;
 
-            if(item.classList.value === 'pushDestination') {
+            console.log(item);
+
+            if(item.classList.contains('pushDestination')) {
                 let destination = {};
                 const city = form.querySelector("[data-dest='city']");
                 const tripId = form.querySelector("[data-dest='tripId']");
-
+                console.log('clicked');
                 const payload = {
                     city: city.value
                 };
+
+                console.log(payload);
 
                 fetch('http://localhost:8080/destination', {
                     method: 'POST',
@@ -126,11 +132,13 @@ export const destinationForm = () => {
                         city: city.value,
                         ...response
                     };
+                    console.log(destination);
                     destinations.push(destination);
                     localStorage.setItem('destinations', JSON.stringify(destinations));
                     
                     showDestinations(destination.tripId);
-                });
+                })
+                .catch((error => console.log(error)));
             }
         }
     });
@@ -168,7 +176,6 @@ export const showDestinations = (tripId) => {
             const item = document.createElement('div');
             item.classList.add('destination', 'accordion');
             item.setAttribute('data-accordion', 'item');
-
             if(tripId === destination.tripId) {
                 const { clouds, weather, temp } = destination.curentWeather;
                 let forecast = document.createElement('div');
@@ -183,8 +190,8 @@ export const showDestinations = (tripId) => {
                             <img class="destination__weatherIcon" src="/images/icons/${weather.icon}.png" />
                             <span class="destination__desc">${weather.description}</span>
                             <span class="destination__current-temp">Current temp: ${temp} ℃</span>
-                            <span class="destination__icon icon icon-arrow" data-accordion="toggle">${arrow}</span>
-                            <span class="destination__icon icon icon-remove">${remove}</span>
+                            <span class="destination__icon icon icon-arrow push-right" data-accordion="toggle">${arrow}</span>
+                            <span class="destination__icon icon icon-remove" data-action="remove" data-remove="dest" data-removeid="${destination.id}" data-tripid="${tripId}">${remove}</span>
                         </div>
                     </div>
                     <div class="destination__info" data-accordion="panel">
@@ -217,17 +224,24 @@ export const accordions = () => {
     });
 }
 
-// export const accordions = () => {
-//     document.querySelector('body').addEventListener('click', e => {
-//         if(e.target.matches(".accordion") || e.target.closest(".accordion")) {
-//             const item = e.target;
-//             if(item.hasAttribute('data-accordion') && item.getAttribute('data-accordion') === 'toggle') {
-//                 const parent = item.parentElement;
-//                 const toggle = parent.querySelector("[data-accordion='toggle']");
-//                 const panel = parent.querySelector("[data-accordion='panel']");
-//                 toggle.classList.toggle('active');
-//                 panel.classList.toggle('active');
-//             }
-//         }
-//     });
-// }
+export const removeItem = () => {
+    document.querySelector('body').addEventListener('click', e => {
+        if(e.target.matches("[data-action='remove']")) {
+            const removeItem = e.target.getAttribute('data-remove');
+            const itemId = e.target.getAttribute('data-removeid')
+            
+            if(removeItem === 'trip') {
+                const items = JSON.parse(localStorage.getItem('trips'));
+                const filtered = items.filter(item => item.id !== itemId);
+                localStorage.setItem('trips', JSON.stringify(filtered));
+                showTrips();
+            } else if(removeItem === 'dest') {
+                const tripId = e.target.getAttribute('data-tripid');
+                const items = JSON.parse(localStorage.getItem('destinations'));
+                const filtered = items.filter(item => item.id !== itemId);
+                localStorage.setItem('destinations', JSON.stringify(filtered));
+                showDestinations(tripId);
+            }
+        }
+    });
+}
