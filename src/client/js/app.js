@@ -57,14 +57,16 @@ export const showTrips = () => {
     trips.forEach(trip => {
         const tripItem = document.createElement('div');
         tripItem.classList.add('trip', 'accordion');
+        tripItem.setAttribute('data-accordion', 'item');
 
         const { id, tripTitle, startDate, endDate, days } = trip;
 
         tripItem.innerHTML = `
-            <div class="trip__header" data-accordion="toggle">
+            <div class="trip__header">
                 <div class="trip__title">
                     ${tripTitle}
-                    <span>more</span>
+                    <span class="destination__icon icon icon-arrow" data-accordion="toggle">${arrow}</span>
+                    <span class="destination__icon icon icon-remove">${remove}</span>
                 </div>
                 <div class="trip__details">
                     <p><strong>Your trip start on:</strong> ${startDate} <strong>, end on:</strong> ${endDate}. <strong>Length of the trip:</strong> ${days} Days</p>
@@ -165,6 +167,7 @@ export const showDestinations = (tripId) => {
         destinations.forEach(destination => {
             const item = document.createElement('div');
             item.classList.add('destination', 'accordion');
+            item.setAttribute('data-accordion', 'item');
 
             if(tripId === destination.tripId) {
                 const { clouds, weather, temp } = destination.curentWeather;
@@ -174,13 +177,13 @@ export const showDestinations = (tripId) => {
                 forecast = forecast.outerHTML;
 
                 item.innerHTML = `
-                    <div class="destination__header" data-accordion="toggle">
+                    <div class="destination__header">
                         <div class="destination__basic">
                             <h3 class="destination__title">${destination.city}</h3>
                             <img class="destination__weatherIcon" src="/images/icons/${weather.icon}.png" />
                             <span class="destination__desc">${weather.description}</span>
                             <span class="destination__current-temp">Current temp: ${temp} ℃</span>
-                            <span class="destination__icon icon icon-arrow">${arrow}</span>
+                            <span class="destination__icon icon icon-arrow" data-accordion="toggle">${arrow}</span>
                             <span class="destination__icon icon icon-remove">${remove}</span>
                         </div>
                     </div>
@@ -198,24 +201,13 @@ export const showDestinations = (tripId) => {
     }
 }
 
-
-// export const accordions = () => {
-//         document.querySelector('body').addEventListener('click', e => {
-//             if(e.target.matches(".accordion") || e.target.closest(".accordion")) {
-//                 const item = e.target;
-//                 if(item.hasAttribute('data-accordion') && item.getAttribute('data-accordion') === 'toggle') {
-
-//                 }
-//             }
-//         });
-//     }
-
 export const accordions = () => {
     document.querySelector('body').addEventListener('click', e => {
-        if(e.target.matches(".accordion") || e.target.closest(".accordion")) {
+        if(e.target.matches("[data-accordion='toggle']") || e.target.closest("[data-accordion='toggle']")) {
             const item = e.target;
+            
             if(item.hasAttribute('data-accordion') && item.getAttribute('data-accordion') === 'toggle') {
-                const parent = item.parentElement;
+                const parent = item.closest("[data-accordion='item']");
                 const toggle = parent.querySelector("[data-accordion='toggle']");
                 const panel = parent.querySelector("[data-accordion='panel']");
                 toggle.classList.toggle('active');
@@ -224,3 +216,18 @@ export const accordions = () => {
         }
     });
 }
+
+// export const accordions = () => {
+//     document.querySelector('body').addEventListener('click', e => {
+//         if(e.target.matches(".accordion") || e.target.closest(".accordion")) {
+//             const item = e.target;
+//             if(item.hasAttribute('data-accordion') && item.getAttribute('data-accordion') === 'toggle') {
+//                 const parent = item.parentElement;
+//                 const toggle = parent.querySelector("[data-accordion='toggle']");
+//                 const panel = parent.querySelector("[data-accordion='panel']");
+//                 toggle.classList.toggle('active');
+//                 panel.classList.toggle('active');
+//             }
+//         }
+//     });
+// }

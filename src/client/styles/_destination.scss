@@ -11,14 +11,9 @@ $spacing: 0 12px 0 0;
 
     &__basic {
         display: flex;
-        pointer-events: none;
         align-items: center;
         padding: 12px 24px;
         overflow: hidden;
-    }
-
-    &__icon {
-        
     }
 
     &__weatherIcon {
