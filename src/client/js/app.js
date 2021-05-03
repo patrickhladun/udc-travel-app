@@ -44,7 +44,6 @@ export const tripForm = () => {
         trips.push(tripData);
         localStorage.setItem('trips', JSON.stringify(trips));
         showTrips();
-        
     });
 };
 
@@ -54,7 +53,6 @@ export const showTrips = () => {
     tripList.innerHTML = '';
 
     trips.forEach(trip => {
-        
         const tripItem = document.createElement('div');
         tripItem.classList.add('trip', 'accordion');
 
@@ -147,7 +145,7 @@ export const showDestinations = (tripId) => {
         destinations.forEach(destination => {
             const item = document.createElement('div');
             item.classList.add('destination', 'accordion');
-
+            console.log(destination);
             if(tripId === destination.tripId) {
                 const { clouds, temp } = destination.curentWeather;
                 item.innerHTML = `
@@ -156,15 +154,15 @@ export const showDestinations = (tripId) => {
                     </div>
                     <div class="destination__info" data-accordion="panel">
                         <img class="destination__image" src="${destination.imageURL}" />
-                        <div class="current-weather">
-                            <div class="current-weather__temp">${temp} ℃</div>
+                        <div class="destination__details">
+                            <div class="current-weather__temp">Current temperature: ${temp} ℃</div>
                         </div>
                     </div>
                 `;
                 destinationList.appendChild(item);
             }
         });
-    }
+    }``
 }
 
 export const accordions = () => {
