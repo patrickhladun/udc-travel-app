@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { arrow, remove } from './icons';
 import moment from 'moment';
 
 export const getBackground = () => {
@@ -171,15 +172,16 @@ export const showDestinations = (tripId) => {
                 forecast.classList.add('forecast');
                 forecast.appendChild(getForecastWeather(destination.forecastWeather));
                 forecast = forecast.outerHTML;
-                
+
                 item.innerHTML = `
                     <div class="destination__header" data-accordion="toggle">
                         <div class="destination__basic">
                             <h3 class="destination__title">${destination.city}</h3>
-                            <img class="destination__icon" src="/images/icons/${weather.icon}.png" />
+                            <img class="destination__weatherIcon" src="/images/icons/${weather.icon}.png" />
                             <span class="destination__desc">${weather.description}</span>
                             <span class="destination__current-temp">Current temp: ${temp} ℃</span>
-                            <span class="destination__more">more</span>
+                            <span class="destination__icon icon icon-arrow">${arrow}</span>
+                            <span class="destination__icon icon icon-remove">${remove}</span>
                         </div>
                     </div>
                     <div class="destination__info" data-accordion="panel">
@@ -195,6 +197,18 @@ export const showDestinations = (tripId) => {
         });
     }
 }
+
+
+// export const accordions = () => {
+//         document.querySelector('body').addEventListener('click', e => {
+//             if(e.target.matches(".accordion") || e.target.closest(".accordion")) {
+//                 const item = e.target;
+//                 if(item.hasAttribute('data-accordion') && item.getAttribute('data-accordion') === 'toggle') {
+
+//                 }
+//             }
+//         });
+//     }
 
 export const accordions = () => {
     document.querySelector('body').addEventListener('click', e => {

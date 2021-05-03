@@ -17,11 +17,11 @@ $spacing: 0 12px 0 0;
         overflow: hidden;
     }
 
-    &__more {
-        margin-left: auto;
+    &__icon {
+        
     }
 
-    &__icon {
+    &__weatherIcon {
         max-width: 32px;
         margin: $spacing;
     }
@@ -97,4 +97,8 @@ $spacing: 0 12px 0 0;
         font-size: 14px;
     }
 
+}
+
+.push-right {
+    margin-left: auto;
 }
