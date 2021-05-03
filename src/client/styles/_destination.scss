@@ -3,7 +3,6 @@ $spacing: 0 12px 0 0;
     background: tint($color-primary, 20%);
     margin-bottom: 4px;
     overflow: hidden;
-    color: tint($color-primary, 90%);
 
     &__header {
         cursor: pointer;
@@ -28,6 +27,7 @@ $spacing: 0 12px 0 0;
     }
 
     &__title {
+        color: tint($color-primary, 90%);
         margin: $spacing;
     }
 
@@ -40,10 +40,10 @@ $spacing: 0 12px 0 0;
     }
 
     &__info {
-        background: tint($color-primary, 80%);
+        padding: 24px;
+        background: tint($color-shade, 90%);
         display: none;
         overflow: hidden;
-
 
         &.active {
             display: flex;
@@ -51,7 +51,12 @@ $spacing: 0 12px 0 0;
     }
 
     &__image {
-        max-width: 200px;
+        max-width: 400px;
+    }
+
+    &__forecast {
+        padding: 0 24px;
+        overflow: hidden;
     }
 }
 
@@ -65,8 +70,31 @@ $spacing: 0 12px 0 0;
 
 .forecast {
     display: flex;
+    max-width: 100%;
+    overflow: auto;
+    overflow-y: hidden;
 
     &__icon {
         width: 32px;
     }
+
+    &__column {
+        background: tint($color-shade, 90%);
+        padding: 18px 26px;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        border-right: 1px solid tint($color-shade, 70%);
+    }
+
+    &__month {
+        font-size: 12px;
+        color: tint($color-shade, 40%);
+    }
+
+    &__day {
+        font-size: 14px;
+    }
+
 }
