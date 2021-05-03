@@ -1,26 +1,36 @@
-input {
+input, input[type=date] {
+    border: 1px solid transparent;
+    padding: 10px 12px;
+    margin-right: 4px;
+    font-size: 16px;
+    line-height: 1.2;
+}
+
+input[type=date] {
     padding: 8px 12px;
+    border: 1px solid transparent;
     margin-right: 4px;
 }
+
 .submit {
-    background: $color-primary;
+    // background: $color-primary;
     display: block;
-    padding: 8px 12px;
+    padding: 12px 24px;
     border: none;
 }
+
 label {
     padding: 4px 0px;
 }
+
 .field {
     display: flex;
     flex-direction: column;
 }
 
-.trip-form {
-    padding: 24px;
-    max-width: 300px;
-}
-
-.field__hidden {
-    display: none;
+.button {
+    background: $color-primary;
+    padding: 12px 34px;
+    color: $color-text-light;
+    border: 1px solid transparent;
 }

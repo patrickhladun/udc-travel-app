@@ -7,43 +7,61 @@ html {
 }
 
 body {
-    background: tint($color-shade, 70%);
-    font: 16px/22px Arial, sans-serif;
+    background: tint($color-shade, 85%);
+    font: 16px/22px 'Roboto', sans-serif;
+    font-weight: 400;
     color: $color-text;
 }
 
-p {
-    font: 16px/22px Arial, sans-serif;
-}
-
-h1 {
-    font: 48px/56px 'Work Sans', sans-serif;
-}
-
-h2 {
-    font: 24px/30px 'Work Sans', sans-serif;
-}
-
-h3 {
-    font: 22px/30px 'Work Sans', sans-serif;
-}
-
 .page {
-    max-width: 960px;
+    max-width: 1140px;
     margin: 0 auto;
 }
-#header {
-    background-size: cover;
-    min-height: 280px;
-    overflow: hidden;
-    padding: 60px 0;
+header {
+    padding: 180px 0;
 }
+
 .page-title {
+    font-size: 128px;
+    font-weight: 900;
     text-align: center;
-}
-.add-trip {
-    background: rgba($color-primary, 0.9);
-    max-width: 600px;
-    margin: 0 auto;
     color: $color-text-light;
+}
+
+.section {
+    position: relative;
+}
+.section__background {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 100vw;
+    margin-left: -50vw;
+    height: 100%;
+    z-index: 10;
+
+    &--image {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+}
+.section__content {
+    position: relative;
+    overflow: hidden;
+    z-index: 50;
+}
+.section__overlay {
+    background: linear-gradient(90deg, $color-primary 0%, $color-secondary 100%);
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 100vw;
+    margin-left: -50vw;
+    height: 100%;
+    z-index: 20;
+    opacity: 0.3;
+}
+.home-background-image {
+    filter: saturate(0%) brightness(80%);
 }

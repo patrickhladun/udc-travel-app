@@ -5,7 +5,7 @@ export const getBackground = () => {
     fetch('http://localhost:8080/background')
     .then(response => response.json())
     .then(response => {
-        const header = document.getElementById('header');
+        const header = document.getElementById('header-bg');
         header.style.backgroundImage = `url(${response.url})`;
     });   
 };
@@ -61,12 +61,12 @@ export const showTrips = () => {
 
         tripItem.innerHTML = `
             <div class="trip__header" data-accordion="toggle">
-                <h2 class="trip__title">${tripTitle}</h2>
+                <div class="trip__title">
+                    ${tripTitle}
+                    <span>more</span>
+                </div>
                 <div class="trip__details">
-                    <p><span>Start date:</span> ${startDate}</p>
-                    <p><span>End date:</span> ${endDate}</p>
-                    <p><span>Length of the trip:</span> ${days} Days</p>
-                    </p>
+                    <p><strong>Your trip start on:</strong> ${startDate} <strong>, end on:</strong> ${endDate}. <strong>Length of the trip:</strong> ${days} Days</p>
                 </div>
             </div>
             <div class="trip__destinations" data-accordion="panel">
@@ -79,7 +79,7 @@ export const showTrips = () => {
                         <input type="text" id="tripId" name="tripId" value="${id}" data-dest="tripId">
                     </div>
                     <div>
-                        <button type="submit" class="pushDestination">Add Destination</button>
+                        <button type="submit" class="pushDestination button">Add Destination</button>
                     </div>
                 </form>
                 <div class="destination-list" data-destination-list="${id}"></div>

@@ -5,9 +5,9 @@
     @return mix(black, $color, $percentage);
 }
 
-$color-primary: #681d70;
-$color-secondary: #f25a38;
-$color-teriary: #f2ae2e;
+$color-primary: #f25a38;
+$color-secondary: #f2ae2e;
+$color-teriary: #681d70;
 $color-shade: #474747;
 
 $color-text: shade($color-shade, 60%);

@@ -1,22 +1,53 @@
+#trip-list {
+    padding: 60px;
+}
+
+.add-trip {
+    background: tint($color-shade, 90%);
+    max-width: 800px;
+    margin: 0 auto;
+    // color: $color-text-light;
+}
+
+.trip-form {
+    padding: 24px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.field__hidden {
+    display: none;
+}
+
 .trip {
+    background: tint($color-shade, 80%);
     margin-bottom: 12px;
     display: flex;
     flex-direction: column;
 
     &__header {
-        background: $color-secondary;
         cursor: pointer;
         transition: all 0.3s ease-out;
         overflow: hidden;
 
         &.active {
-            background: tint($color-secondary, 20%);
             transition: all 0.3s ease-in;
         }
     }
 
+    &__title {
+        background: linear-gradient(90deg, tint($color-shade, 0%) 0%, tint($color-shade, 20%) 100%);
+        padding: 24px 34px;
+        margin: 0;
+        pointer-events: none;
+        overflow: hidden;
+        color: $color-text-light;
+        display: flex;
+        justify-content: space-between;
+    }
+
     &__details {
-        background: tint($color-secondary, 50%);
         padding: 12px;
 
         p {
@@ -24,15 +55,7 @@
         }
     }
 
-    &__title {
-        color: shade($color-secondary, 70%);
-        padding: 4px 12px;
-        line-height: 0;
-        pointer-events: none;
-    }
-
     &__destinations {
-        background: tint($color-secondary, 70%);
         padding: 12px;
         display: none;
         transition: all 0.3s ease-out;

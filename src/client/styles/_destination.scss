@@ -54,6 +54,11 @@ $spacing: 0 12px 0 0;
         max-width: 200px;
     }
 }
+
+.addDestination {
+    display: flex;
+}
+
 .destination-list {
     margin-top: 24px;
 }
@@ -63,6 +68,5 @@ $spacing: 0 12px 0 0;
 
     &__icon {
         width: 32px;
-        // height: 100%;
     }
 }
