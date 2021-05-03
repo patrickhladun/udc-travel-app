@@ -27,6 +27,7 @@ export const tripForm = () => {
         let startDate = document.getElementById('startDate').value;
         let endDate = document.getElementById('endDate').value;
 
+        // Days to tripbear
         const start = moment(startDate);
         const end = moment(endDate);
         const days = Math.abs(moment.duration(start.diff(end)).asDays());
@@ -147,7 +148,7 @@ export const showDestinations = (tripId) => {
             item.classList.add('destination', 'accordion');
             console.log(destination);
             if(tripId === destination.tripId) {
-                const { clouds, temp } = destination.curentWeather;
+                const { clouds, weather, temp } = destination.curentWeather;
                 item.innerHTML = `
                     <div class="destination__header" data-accordion="toggle">
                         <h3 class="destination__title">${destination.city}</h3>
@@ -155,6 +156,10 @@ export const showDestinations = (tripId) => {
                     <div class="destination__info" data-accordion="panel">
                         <img class="destination__image" src="${destination.imageURL}" />
                         <div class="destination__details">
+                            <div>
+                                <p><img src="/images/icons/${weather.icon}.png" /> </p>
+                                <p>${weather.description}</p>
+                            </div>
                             <div class="current-weather__temp">Current temperature: ${temp} ℃</div>
                         </div>
                     </div>
