@@ -1,0 +1,127 @@
+$spacing: 0 12px 0 0;
+
+.destination {
+    margin-bottom: 4px;
+    overflow: hidden;
+
+    &__header {
+        border-bottom: 1px solid $color-bg-dest;
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+    &__basic {
+        display: flex;
+        align-items: flex-end;
+        padding: 12px 24px;
+        overflow: hidden;
+    }
+
+    &__weatherIcon {
+        max-width: 32px;
+        margin: $spacing;
+    }
+
+    &__title {
+        margin: $spacing;
+    }
+
+    &__desc {
+        display: none;
+        margin: $spacing;
+
+        @include break(sm) {
+            display: block;
+        }
+    }
+
+    &__current-temp {
+        margin: $spacing;
+
+        &:before {
+            content: 'Temp:';
+
+            @include break(sm) {
+                content: 'Current temp:';
+            }
+        }
+    }
+
+    &__info {
+        padding: 16px 0;
+        display: none;
+        overflow: hidden;
+        align-items: flex-end;
+
+        &.active {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            @include break(sm) {
+                flex-direction: row;
+                align-items: flex-end;
+            }
+        }
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+
+        @include break(sm) {
+            max-width: 400px;
+        }
+    }
+
+    &__forecast {
+        overflow: hidden;
+
+        @include break(sm) {
+            padding: 0 24px;
+        }
+    }
+}
+
+.addDestination {
+    display: flex;
+}
+
+.destination-list {
+    margin-top: 24px;
+}
+
+.forecast {
+    display: flex;
+    max-width: 100%;
+    overflow: auto;
+    overflow-y: hidden;
+
+    &__icon {
+        width: 32px;
+    }
+
+    &__column {
+        background: $color-bg-forecast;
+        padding: 18px 26px;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        border-right: 1px solid tint($color-shade, 70%);
+    }
+
+    &__month {
+        font-size: 12px;
+        color: $color-txt-forecast;
+    }
+
+    &__day {
+        font-size: 14px;
+    }
+
+}
+
+.push-right {
+    margin-left: auto;
+}
