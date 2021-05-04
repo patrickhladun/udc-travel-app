@@ -31,9 +31,10 @@ app.post('/destination', async (req, res) => {
     await fetch(geoUrl)
     .then(response => response.json())
     .then(response => {
-        const { lat, lng, toponymName } = response.geonames[0];
+        const { lat, lng, toponymName, countryName } = response.geonames[0];
         data = {
             city: toponymName,
+            countryName,
             lat,
             lng
         }
@@ -63,22 +64,50 @@ app.post('/destination', async (req, res) => {
         }
     })
     .catch(error => console.log('error', error));
+    
+    const pixabayQueryCity  = `&q=${data.city}&orientation=horizontal&image_type=photo`;
+    const pixabayQueryCountry  = `&q=${data.countryName}&orientation=horizontal&image_type=photo`;
+    let pixabayUrl = `https://pixabay.com/api/?key=${pixabayKey}${pixabayQueryCity}`;
+    let imageURL = '';
 
-    const pixabayQuery  = `&q=${data.city}&orientation=horizontal&image_type=photo`;
+    await fetch(pixabayUrl)
+    .then(response => response.json())
+    .then(response => {
+        imageURL = response.hits[0].webformatURL;
+    })
+    .catch(error => console.log('error', error));
+
+    if(imageURL === '') {
+        let pixabayUrl = `https://pixabay.com/api/?key=${pixabayKey}${pixabayQueryCountry}`;
+        await fetch(pixabayUrl)
+        .then(response => response.json())
+        .then(response => {
+            imageURL = response.hits[0].webformatURL;
+        })
+        .catch(error => console.log('error', error));
+    }
+
+    data = {
+        ...data,
+        imageURL
+    }
+
+    res.send(data);
+});
+
+
+const getCityImage = async (data, pixabayKey) => {
+    const pixabayQuery  = `&q=tychy&orientation=horizontal&image_type=photo`;
     const pixabayUrl = `https://pixabay.com/api/?key=${pixabayKey}${pixabayQuery}`;
 
     await fetch(pixabayUrl)
     .then(response => response.json())
     .then(response => {
-        data = {
-            ...data,
-            imageURL: response.hits[0].webformatURL
-        }
+        console.log(response.hits[0].webformatURL);
+        return response.hits[0].webformatURL;
     })
     .catch(error => console.log('error', error));
-
-    res.send(data);
-});
+};
 
 app.get('/background', (req, res) => {
     const key = process.env.PIXABAY_KEY;
