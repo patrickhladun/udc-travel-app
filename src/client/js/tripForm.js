@@ -3,7 +3,7 @@ import moment from 'moment';
 import { showTrips } from './showTrips';
 
 export const tripForm = () => {
-    // Check if trip exist in localStorage
+
     let trips = localStorage.getItem('trips') ? JSON.parse(localStorage.getItem('trips')) : [];    
     localStorage.setItem('trips', JSON.stringify(trips));
     
@@ -21,7 +21,7 @@ export const tripForm = () => {
             error.innerHTML = '<p>All fields need to fee filled!<p>';
         } else {
             error.innerHTML = '';
-            // Days to tripbear
+ 
             const start = moment(startDate);
             const end = moment(endDate);
             const days = Math.abs(moment.duration(start.diff(end)).asDays());
