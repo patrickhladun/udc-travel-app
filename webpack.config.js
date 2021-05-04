@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
     entry: './src/client/index.js',
@@ -19,6 +20,7 @@ module.exports = {
                 from: "src/client/images",
                 to: "images"     
             }],
-        })
+        }),
+        new WorkboxPlugin.GenerateSW()
     ],
 };
