@@ -3,6 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const express = require('express');
 const fetch = require('node-fetch');
+const path = require('path');
 const { response } = require('express');
 
 dotenv.config();
@@ -16,7 +17,8 @@ app.use(cors());
 const port = 8080;
 const server = app.listen(port, () => console.log(`Running on port: ${port}`));
 
-app.use(express.static('public'));
+app.use(express.static('dist'));
+app.get('/', (req, res) => res.sendFile(path.resolve('dist/index.html')));
 
 app.post('/destination', async (req, res) => {
     const geoKey = process.env.GEONAMES_KEY;
@@ -95,20 +97,6 @@ app.post('/destination', async (req, res) => {
     res.send(data);
 });
 
-
-const getCityImage = async (data, pixabayKey) => {
-    const pixabayQuery  = `&q=tychy&orientation=horizontal&image_type=photo`;
-    const pixabayUrl = `https://pixabay.com/api/?key=${pixabayKey}${pixabayQuery}`;
-
-    await fetch(pixabayUrl)
-    .then(response => response.json())
-    .then(response => {
-        console.log(response.hits[0].webformatURL);
-        return response.hits[0].webformatURL;
-    })
-    .catch(error => console.log('error', error));
-};
-
 app.get('/background', (req, res) => {
     const key = process.env.PIXABAY_KEY;
     const query = '&q=city&orientation=horizontal&image_type=photo';
@@ -127,6 +115,3 @@ app.get('/background', (req, res) => {
     })
     .catch(error => console.log('error', error));
 });
-
-// TODO: Pull in an image for the country when no results
-// TODO: Throw an error if there is no city found
