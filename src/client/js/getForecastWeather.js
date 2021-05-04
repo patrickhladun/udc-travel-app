@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 export const getForecastWeather = (forecast) => {
-    const fragment = document.createDocumentFragment();1
+    const fragment = document.createDocumentFragment();
 
     const columns = forecast.map(day => {
         const column = document.createElement('div');
