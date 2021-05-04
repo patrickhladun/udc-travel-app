@@ -6,7 +6,7 @@
     background: tint($color-shade, 90%);
     max-width: 800px;
     margin: 0 auto;
-    // color: $color-text-light;
+    box-shadow: 0px 0px 40px rgba(shade($color-shade, 60%), 0.6);
 }
 
 .trip-form {
@@ -21,7 +21,6 @@
 }
 
 .trip {
-    background: tint($color-shade, 80%);
     margin-bottom: 12px;
     display: flex;
     flex-direction: column;
@@ -37,13 +36,13 @@
     }
 
     &__title {
-        background: linear-gradient(90deg, tint($color-shade, 0%) 0%, tint($color-shade, 20%) 100%);
-        padding: 24px 34px;
+        padding: 16px;
         margin: 0;
         overflow: hidden;
-        color: $color-text-light;
         display: flex;
         justify-content: space-between;
+        align-items: flex-end;
+        border-bottom: 1px solid tint($color-shade, 30%);
     }
 
     &__details {

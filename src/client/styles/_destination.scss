@@ -1,17 +1,18 @@
 $spacing: 0 12px 0 0;
 .destination {
-    background: tint($color-primary, 20%);
+    // background: tint($color-primary, 20%);
     margin-bottom: 4px;
     overflow: hidden;
 
     &__header {
+        border-bottom: 1px solid tint($color-shade, 30%);
         cursor: pointer;
         overflow: hidden;
     }
 
     &__basic {
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         padding: 12px 24px;
         overflow: hidden;
     }
@@ -22,7 +23,7 @@ $spacing: 0 12px 0 0;
     }
 
     &__title {
-        color: tint($color-primary, 90%);
+        // color: tint($color-primary, 90%);
         margin: $spacing;
     }
 
@@ -35,10 +36,10 @@ $spacing: 0 12px 0 0;
     }
 
     &__info {
-        padding: 24px;
-        background: tint($color-shade, 90%);
+        padding: 16px 0;
         display: none;
         overflow: hidden;
+        align-items: flex-end;
 
         &.active {
             display: flex;

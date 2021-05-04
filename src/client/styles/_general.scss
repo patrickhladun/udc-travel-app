@@ -7,7 +7,7 @@ html {
 }
 
 body {
-    background: tint($color-shade, 85%);
+    background: tint($color-shade, 90%);
     font: 16px/22px 'Roboto', sans-serif;
     font-weight: 400;
     color: $color-text;
@@ -48,7 +48,6 @@ header {
 }
 .section__content {
     position: relative;
-    overflow: hidden;
     z-index: 50;
 }
 .section__overlay {
