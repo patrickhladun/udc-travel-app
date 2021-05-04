@@ -1,5 +1,5 @@
 .icon {
-    fill: $color-shade;
+    fill: $color-icon-fill;
     width: 32px;
     height: 32px;
     display: flex;
@@ -19,7 +19,7 @@
     }
 
     &:hover {
-        background: tint($color-shade, 82%);
+        background: $color-icon-background;
     }
 }
 

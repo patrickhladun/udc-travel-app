@@ -7,30 +7,40 @@ html {
 }
 
 body {
-    background: tint($color-shade, 90%);
+    background: $color-bg-main;
+    color: $color-text;
     font: 16px/22px 'Roboto', sans-serif;
     font-weight: 400;
-    color: $color-text;
 }
 
 .page {
     max-width: 1140px;
     margin: 0 auto;
 }
-header {
-    padding: 180px 0;
-}
 
 .page-title {
-    font-size: 128px;
+    font-size: 48px;
     font-weight: 900;
     text-align: center;
     color: $color-text-light;
+
+    @include break(sm) {
+        font-size: 128px;
+    }
 }
 
 .section {
     position: relative;
 }
+
+.section-header {
+    padding: 30px 0 60px 0;
+
+    @include break(sm) {
+        padding: 120px 0 180px 0;
+    }
+}
+
 .section__background {
     position: absolute;
     left: 50%;
@@ -46,12 +56,15 @@ header {
         background-repeat: no-repeat;
     }
 }
+
 .section__content {
     position: relative;
     z-index: 50;
+    padding: 0 24px;
 }
+
 .section__overlay {
-    background: linear-gradient(90deg, $color-primary 0%, $color-secondary 100%);
+    background: $color-bg-overlay;
     position: absolute;
     left: 50%;
     top: 0;
@@ -61,6 +74,7 @@ header {
     z-index: 20;
     opacity: 0.3;
 }
+
 .home-background-image {
     filter: saturate(0%) brightness(80%);
 }

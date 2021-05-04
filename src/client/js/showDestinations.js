@@ -24,7 +24,7 @@ export const showDestinations = (tripId) => {
                             <h3 class="destination__title">${destination.city}</h3>
                             <img class="destination__weatherIcon" src="/images/icons/${weather.icon}.png" />
                             <span class="destination__desc">${weather.description}</span>
-                            <span class="destination__current-temp">Current temp: ${temp} ℃</span>
+                            <span class="destination__current-temp">${temp} ℃</span>
                             <span class="destination__icon icon icon-arrow push-right" data-accordion="toggle">${arrow}</span>
                             <span class="destination__icon icon icon-remove" data-action="remove" data-remove="dest" data-removeid="${destination.id}" data-tripid="${tripId}">${remove}</span>
                         </div>

@@ -1,0 +1,49 @@
+body.night {
+    background: $color-bg-main-dark;
+    color: $color-text-light;
+}
+
+.night {
+    .page-title {
+        color: $color-text-light;
+    }
+
+    .section__overlay {
+        background: $color-bg-overlay-dark;
+    }
+
+    .icon {
+        fill: $color-icon-fill-dark;
+
+        &:hover {
+            background: $color-icon-background-dark;
+        }
+    }
+
+    .add-trip {
+        background: shade($color-shade, 70%);
+        box-shadow: 0px 0px 40px rgba(shade($color-shade, 60%), 0.6);
+    }
+
+    .trip {
+        &__title {
+            border-bottom: 1px solid tint($color-shade, 30%);
+        }
+    }
+
+    .destination {
+        &__header {
+            border-bottom: 1px solid tint($color-shade, 30%);
+        }
+    }
+
+    .forecast {
+        &__column {
+            background: $color-bg-forecast-dark;
+        }
+
+        &__month {
+            color: $color-txt-forecast-dark;
+        }
+    }
+}

@@ -1,7 +1,12 @@
+
 @import './normalize';
+@import './helpers/functions';
+@import './helpers/mixins';
 @import './variables';
 @import './general';
-@import './forms';
+@import './button';
+@import './form';
 @import './destination';
 @import './trip';
-@import './icons';
+@import './icon';
+@import './night-mode';

@@ -1,9 +1,10 @@
 input, input[type=date] {
     border: 1px solid transparent;
-    padding: 10px 12px;
+    padding: 12px 12px;
     margin-right: 4px;
     font-size: 16px;
-    line-height: 1.2;
+    line-height: 1.1;
+    width: 100%;
 }
 
 input[type=date] {
@@ -13,7 +14,6 @@ input[type=date] {
 }
 
 .submit {
-    // background: $color-primary;
     display: block;
     padding: 12px 24px;
     border: none;
@@ -26,12 +26,10 @@ label {
 .field {
     display: flex;
     flex-direction: column;
-}
+    margin-right: 12px;
 
-.button {
-    background: $color-primary;
-    padding: 12px 34px;
-    color: $color-text-light;
-    border: 1px solid transparent;
-    cursor: pointer;
+
+    &__hidden {
+        display: none;
+    }
 }

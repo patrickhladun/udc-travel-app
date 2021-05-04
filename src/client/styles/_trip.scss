@@ -1,23 +1,22 @@
 #trip-list {
-    padding: 60px;
+    padding: 60px 24px;
 }
 
 .add-trip {
-    background: tint($color-shade, 90%);
+    background: $color-bg-add-trip;
+    box-shadow: 0px 0px 40px $color-shadow-add-trip;
     max-width: 800px;
     margin: 0 auto;
-    box-shadow: 0px 0px 40px rgba(shade($color-shade, 60%), 0.6);
 }
 
 .trip-form {
     padding: 24px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-}
-
-.field__hidden {
-    display: none;
+    
+    @include break(sm) {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
 }
 
 .trip {
@@ -42,7 +41,7 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
-        border-bottom: 1px solid tint($color-shade, 30%);
+        border-bottom: 1px solid $color-border-add-trip;
     }
 
     &__details {
