@@ -1,6 +1,6 @@
 {
   "name": "udc-travel_app",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "main": "index.js",
   "repository": "git@github.com:patrickhladun/udc-travel-app.git",
   "author": "Patrick Hladun",
