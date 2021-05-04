@@ -1,37 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import configureStore from './store/configureStore';
-import Header from './components/Header/header';
-import AddTrip from './components/Trip/AddTrip';
-import TripList from './components/Trip/TripList';
-import Footer from './components/Footer/footer';
+import { accordions } from './js/accordions';
+import { removeItem } from './js/removeItem';
+import { destinationForm } from './js/destinationForm';
+import { tripForm } from './js/tripForm';
+import { showTrips } from './js/showTrips';
+import { getBackground } from './js/getBackground';
 import './styles/style.scss';
 
-const store = configureStore();
+// TODO: add mobile styles
+// TODO: add hover stated
+// TODO: add validation to add a trip form and display errors
+// TODO: pull countries and cities
+// TODO: fix issues with double trips adding up
+// TODO: filter trips
+// TODO: update date fields to not be able to select previous dates
+// TODO: add service workers
+// TODO: fix styles naming
+// TODO: add images where images is not available
 
-// add trip including trip name and description start date and end date
-
-// add location to the trip
-// use an API to get a list of countries
-// use an API to get list of cities of the coutry
-// add the the location to the trip
-// use an API to display city actual weather and forecast for a week
-// use an API to get city photgraph
-
-// add notes to the trip
-
-class App extends React.Component {
-    render() {
-        return (
-            <Provider store={store}>
-                <Header />
-                <AddTrip />
-                <TripList />
-                <Footer />
-            </Provider>
-        )
-    }
-}
-
-ReactDOM.render(<App />, document.getElementById('app') );
+getBackground();
+tripForm();
+showTrips();
+destinationForm();
+accordions();
+removeItem();

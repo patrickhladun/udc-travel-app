@@ -1,0 +1,13 @@
+.button {
+    background: $color-bg-button;
+    color: $color-text-light;
+    padding: 12px 34px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        opacity: 0.7;
+        transition: all 0.3s ease-in-out;
+    }
+}

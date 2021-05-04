@@ -1,0 +1,65 @@
+#trip-list {
+    padding: 60px 24px;
+}
+
+.add-trip {
+    background: $color-bg-add-trip;
+    box-shadow: 0px 0px 40px $color-shadow-add-trip;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.trip-form {
+    padding: 24px;
+    
+    @include break(sm) {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+}
+
+.trip {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+        cursor: pointer;
+        transition: all 0.3s ease-out;
+        overflow: hidden;
+
+        &.active {
+            transition: all 0.3s ease-in;
+        }
+    }
+
+    &__title {
+        padding: 16px;
+        margin: 0;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        border-bottom: 1px solid $color-border-add-trip;
+    }
+
+    &__details {
+        padding: 12px;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    &__destinations {
+        padding: 12px;
+        display: none;
+        transition: all 0.3s ease-out;
+
+        &.active {
+            display: block;
+            transition: all 0.3s ease-in;
+        }
+    }
+}

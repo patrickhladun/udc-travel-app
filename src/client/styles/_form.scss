@@ -1,0 +1,40 @@
+input, input[type=date] {
+    border: 1px solid transparent;
+    padding: 12px 12px;
+    margin-right: 4px;
+    font-size: 16px;
+    line-height: 1.1;
+    width: 100%;
+}
+
+input[type=date] {
+    padding: 8px 12px;
+    border: 1px solid transparent;
+    margin-right: 4px;
+}
+
+.submit {
+    display: block;
+    padding: 12px 24px;
+    border: none;
+}
+
+label {
+    padding: 4px 0px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-right: 12px;
+
+
+    &__hidden {
+        display: none;
+    }
+}
+
+.form-error p {
+    padding: 0 24px 12px 24px;
+    margin: 0;
+}

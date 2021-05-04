@@ -1,0 +1,43 @@
+$color-primary: #f25a38;
+$color-secondary: #f2ae2e;
+$color-teriary: #681d70;
+$color-shade: #474747;
+
+$color-text: shade($color-shade, 60%);
+$color-text-light: #fffff8;
+
+$color-bg-main: tint($color-shade, 90%);
+$color-bg-overlay: linear-gradient(90deg, $color-primary 0%, $color-secondary 100%);
+
+$color-icon-fill: $color-shade;
+$color-icon-background: tint($color-shade, 82%);
+
+$color-bg-add-trip: tint($color-shade, 90%);
+$color-shadow-add-trip: rgba(shade($color-shade, 60%), 0.6);
+$color-border-add-trip: tint($color-shade, 30%);
+
+$color-bg-dest: tint($color-shade, 30%);
+
+$color-bg-forecast: tint($color-shade, 90%);
+$color-txt-forecast: tint($color-shade, 40%);
+
+$color-bg-button: $color-primary;
+
+// Dark mode
+$color-bg-main-dark: shade($color-shade, 70%);
+$color-bg-overlay-dark: linear-gradient(90deg, shade($color-primary, 30%) 0%, shade($color-secondary, 30%) 100%);
+
+$color-icon-fill-dark: $color-shade;
+$color-icon-background-dark: tint($color-shade, 82%);
+
+$color-bg-forecast-dark: shade($color-shade, 60%);
+$color-txt-forecast-dark: tint($color-shade, 30%);
+
+$breakpoints: (
+  xs: 35em,
+  sm: 48em,
+  md: 62em,
+  lg: 96em,
+  xl: 102em,
+  xx: 120em
+);
