@@ -15,24 +15,32 @@ export const tripForm = () => {
         const tripTitle = document.getElementById('tripTitle').value;
         let startDate = document.getElementById('startDate').value;
         let endDate = document.getElementById('endDate').value;
+        const error = document.querySelector('.form-error');
 
-        // Days to tripbear
-        const start = moment(startDate);
-        const end = moment(endDate);
-        const days = Math.abs(moment.duration(start.diff(end)).asDays());
+        if(tripTitle === '' || startDate === '' || endDate === '') {
+            error.innerHTML = '<p>All fields need to fee filled!<p>';
+        } else {
+            error.innerHTML = '';
+            // Days to tripbear
+            const start = moment(startDate);
+            const end = moment(endDate);
+            const days = Math.abs(moment.duration(start.diff(end)).asDays());
 
-        startDate = moment(startDate).format('MMMM, dddd');
-        endDate = moment(endDate).format('MMMM, dddd');;
+            startDate = moment(startDate).format('MMMM, dddd');
+            endDate = moment(endDate).format('MMMM, dddd');;
 
-        const tripData = {
-            id: uuidv4(),
-            tripTitle,
-            startDate,
-            endDate,
-            days
+            const tripData = {
+                id: uuidv4(),
+                tripTitle,
+                startDate,
+                endDate,
+                days
+            }
+            trips.push(tripData);
+            localStorage.setItem('trips', JSON.stringify(trips));
+            showTrips();
         }
-        trips.push(tripData);
-        localStorage.setItem('trips', JSON.stringify(trips));
-        showTrips();
+
+        
     });
 };
