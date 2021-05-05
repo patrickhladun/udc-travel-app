@@ -1,3 +1,6 @@
+/**
+ * Get the background for the pahe hero section
+ */
 export const getBackground = () => {
     fetch('http://localhost:8080/background')
     .then(response => response.json())

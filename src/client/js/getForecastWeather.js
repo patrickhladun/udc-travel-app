@@ -1,5 +1,8 @@
-import moment from 'moment';
+import moment from 'moment/src/moment';
 
+/**
+ * Create weather column for each day in the forecast weather 
+ */
 export const getForecastWeather = (forecast) => {
     const fragment = document.createDocumentFragment();
 
