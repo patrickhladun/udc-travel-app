@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import moment from 'moment';
+import moment from 'moment/src/moment';
 import { showTrips } from './showTrips';
 
 export const tripForm = () => {

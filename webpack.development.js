@@ -6,6 +6,17 @@ const mode = 'development';
 
 module.exports = merge(config, {
     mode,
+    optimization: {
+        minimize: true,
+        minimizer: [new TerserPlugin({
+            terserOptions: {
+                format: {
+                    comments: false,
+                },
+            },
+            extractComments: false,
+        })],
+    },
     devServer: {
         port: 3000,
         hot: true
@@ -19,11 +30,7 @@ module.exports = merge(config, {
             },
             {
                 test: /\.s[ac]ss$/i,
-                use: [
-                    "style-loader",
-                    "css-loader",
-                    "sass-loader"
-                ]
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
             },
             {
                 test: /\.png/,

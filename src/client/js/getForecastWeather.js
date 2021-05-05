@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from 'moment/src/moment';
 
 export const getForecastWeather = (forecast) => {
     const fragment = document.createDocumentFragment();
