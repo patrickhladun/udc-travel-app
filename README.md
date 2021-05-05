@@ -8,6 +8,18 @@ This is the Udacity Travel App Capstone project.
 - Weatherbit
 - Pixabay
 
+## Extra features added
+
+- Add end date and display length of trip
+- Pull country image if destination city image is not available
+- Allow user to add multiple trips
+- Allow user to remove trips
+- Allow user to add multiple destinations
+- Allow user to remove destinations
+- Display forecast weather for each destination
+- Use icons for curent weather
+- Use icons for forecst weather
+
 ## To run the app
 
 - Get API keys from API's mentioned above.
