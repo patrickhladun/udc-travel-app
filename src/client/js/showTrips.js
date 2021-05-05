@@ -1,11 +1,16 @@
 import { arrow, remove } from './icons';
 import { showDestinations } from './showDestinations';
 
+/**
+ * Display trips added to local storage
+ */
 export const showTrips = () => {
+    // Grab trips from local storage
     const trips = JSON.parse(localStorage.getItem('trips'));
     const tripList = document.getElementById('trip-list');
     tripList.innerHTML = '';
 
+    // For each trip in the local storage generate html code
     trips.forEach(trip => {
         const { id, tripTitle, startDate, endDate, days } = trip;
         const tripItem = document.createElement('div');
@@ -40,6 +45,7 @@ export const showTrips = () => {
             </div>
         `;
         tripList.appendChild(tripItem);
+        // Display destinations for each trip
         showDestinations(id);
     });
 }

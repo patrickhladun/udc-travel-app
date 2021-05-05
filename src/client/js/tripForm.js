@@ -2,14 +2,18 @@ import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment/src/moment';
 import { showTrips } from './showTrips';
 
+/**
+ * Add a trip to local storage based on user input
+ */
 export const tripForm = () => {
-
+    // Check if trips are in the local storage and assign the to trips const
     let trips = localStorage.getItem('trips') ? JSON.parse(localStorage.getItem('trips')) : [];    
     localStorage.setItem('trips', JSON.stringify(trips));
     
     const addTrip = document.getElementById('addTrip');
     const tripsList = document.getElementById('trip-list');
 
+    // Add addEventListener to the form
     addTrip.addEventListener('submit', (e) => {
         e.preventDefault();
         const tripTitle = document.getElementById('tripTitle').value;
@@ -36,8 +40,10 @@ export const tripForm = () => {
                 endDate,
                 days
             }
+            // Add trip to the local storage
             trips.push(tripData);
             localStorage.setItem('trips', JSON.stringify(trips));
+            // Display trips
             showTrips();
         }
 

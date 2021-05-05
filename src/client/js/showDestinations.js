@@ -1,12 +1,16 @@
 import { getForecastWeather } from './getForecastWeather';
 import { arrow, remove } from './icons';
 
+/**
+ * Grab destinations from local storage and display them in the relevant trip
+ */
 export const showDestinations = (tripId) => {
     const destinations = JSON.parse(localStorage.getItem('destinations'));
     const destinationList = document.querySelector(`[data-destination-list="${tripId}"]`);
     destinationList.innerHTML = '';
 
     if(destinations) {
+        // For each destination in the local storage generate html code
         destinations.forEach(destination => {
             const item = document.createElement('div');
             item.classList.add('destination', 'accordion');
@@ -15,6 +19,7 @@ export const showDestinations = (tripId) => {
                 const { clouds, weather, temp } = destination.curentWeather;
                 let forecast = document.createElement('div');
                 forecast.classList.add('forecast');
+                // Create weather columns for forecast weather
                 forecast.appendChild(getForecastWeather(destination.forecastWeather));
                 forecast = forecast.outerHTML;
 

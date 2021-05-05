@@ -1,3 +1,6 @@
+/**
+ * Add click event to dynamically created elements
+ */
 export const accordions = () => {
     document.querySelector('body').addEventListener('click', e => {
         if(e.target.matches("[data-accordion='toggle']") || e.target.closest("[data-accordion='toggle']")) {
